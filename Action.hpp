@@ -13,7 +13,7 @@ inline void action(Character* source,Character* target,Skill* skill) {
     // perform action
     float points;
 
-    if (skill->getSkillType() == damageHp) { 
+    if (skill->getSkillType() == damageHp) { // damage
         computeAttackPoints(skill->getPoints(),source->getAtk(),target->getDef(),target->getIsDefending());
         if (target->getHp() <= points) { target->setHp(0); }
         else { target->setHp(target->getHp() - points); }

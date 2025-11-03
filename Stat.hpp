@@ -1,12 +1,14 @@
 #pragma once
 
-struct Stat {
-    float current;
-    float max;
+struct Stats {
+    int level;
 
-    Stat() : current(1), max(99) {}
+    float hp; float maxHp;
+    float resource; float maxResource;
+
+    float attack; float defense;
+    float magic; float resistance;
 };
 
-Stat Attack;
-Stat Defense;
-Stat Magic;
+enum class ClassType { Warrior, Mage, Archer, Healer};
+enum class ResourceType { Mana, Stamina};

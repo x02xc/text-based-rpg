@@ -1,16 +1,25 @@
 #include "Mage.h"
 
 Mage::Mage(const string& n,int level)
-    : Character(n, level, mageHp(level), mageHp(level),mageResource(level),mageResource(level)) {
-        stats.emplace_back(Magic);
-        
-        Attack.current = mageAtk(level);
-        Defense.current = mageDef(level);
-        Magic.current = mageMagic(level);
+    : Character(n, level) {
+        stats.hp = mageHp(level);
+        stats.maxHp = mageHp(level);
+        stats.resource = mageResource(level);
+        stats.maxResource = mageResource(level);
+        stats.attack = mageAtk(level);
+        stats.defense = mageDef(level);
+        stats.magic = mageMagic(level);
+        stats.resistance = mageResistance(level);
     };
 
-void Mage::setHpStat() { maxHp = mageHp(level); hp = mageHp(level); }
+void Mage::setHpStat() { stats.maxHp = mageHp(stats.level); stats.maxHp = mageHp(stats.level); }
 
-void Mage::setAtkStat() {Defense.current = mageAtk(level); }
+void Mage::setResourceStat() { stats.maxResource = mageResource(stats.level); stats.resource = mageResource(stats.level); }
 
-void Mage::setDefStat() {Defense.current = mageDef(level); }
+void Mage::setAtkStat() {stats.attack = mageAtk(stats.level); }
+
+void Mage::setDefStat() {stats.defense = mageDef(stats.level); }
+
+void Mage::setMagicStat() { stats.magic = mageMagic(stats.level); }
+
+void Mage::setResistanceStat() { stats.resistance = mageResistance(stats.level); }

@@ -13,22 +13,18 @@ using namespace std;
 class Character {
 protected:
     string name;
-    int level;
-    float exp;
+    Stats stats;
+    float exp; // TODO - progression struct (similar to stats) (would need refactoring for leveling system)
     float nextLevel;
     float expDrop;
-    float maxHp;
-    float hp;
-    float maxResource; // TODO - Mana or Stamina Refactor
     float resource;
     bool isAlive;
     bool isDefending;
     bool isMagic;
-    vector<Stat> stats; // TODO - Refine Stats Vector Functionality
     vector<Skill> skills;
 public:
     // Constructor / Destructor
-    Character(string n,int l, float maxH,float h,float maxR,float r);
+    Character(string n,int l);
 
     virtual ~Character();
 
@@ -57,21 +53,14 @@ public:
 
     // set stats
     virtual void setHpStat() = 0;
+    virtual void setResourceStat() = 0;
     virtual void setAtkStat() = 0;
     virtual void setDefStat() = 0;
-    virtual void setResourceStat() = 0;
-
-    // take dmg
-    virtual void takeDmg(float amount);
-
-    // heal
-    virtual void heal();
+    virtual void setMagicStat() = 0;
+    virtual void setResistanceStat() = 0;
 
     // full heal
     void fullHeal();
-
-    // attack
-    virtual void attack(Character& target);
 
     // defend
     virtual void defend();

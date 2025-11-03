@@ -1,13 +1,25 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const string n,int level)
-    : Character(n, level, enemyHp(level), enemyHp(level),enemyResource(level),enemyResource(level)) {
-        Attack.current = enemyAtk(level);
-        Defense.current = enemyDef(level);
+Enemy::Enemy(const string& n,int level)
+    : Character(n, level) {
+        stats.hp = enemyHp(level);
+        stats.maxHp = enemyHp(level);
+        stats.resource = enemyResource(level);
+        stats.maxResource = enemyResource(level);
+        stats.attack = enemyAtk(level);
+        stats.defense = enemyDef(level);
+        stats.magic = enemyMagic(level);
+        stats.resistance = enemyResistance(level);
     };
 
-void Enemy::setHpStat() { maxHp = enemyHp(level); hp = enemyHp(level); }
+void Enemy::setHpStat() { stats.maxHp = enemyHp(stats.level); stats.maxHp = enemyHp(stats.level); }
 
-void Enemy::setAtkStat() { Attack.current = enemyAtk(level); }
+void Enemy::setResourceStat() { stats.maxResource = enemyResource(stats.level); stats.resource = enemyResource(stats.level); }
 
-void Enemy::setDefStat() { Defense.current = enemyDef(level); }
+void Enemy::setAtkStat() {stats.attack = enemyAtk(stats.level); }
+
+void Enemy::setDefStat() {stats.defense = enemyDef(stats.level); }
+
+void Enemy::setMagicStat() { stats.magic = enemyMagic(stats.level); }
+
+void Enemy::setResistanceStat() { stats.resistance = enemyResistance(stats.level); }

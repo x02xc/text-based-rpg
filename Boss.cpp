@@ -1,15 +1,25 @@
 #include "Boss.h"
 
-Boss::Boss(const string n,int level)
-    : Character(n, level, bossHp(level), bossHp(level),bossResource(level),bossResource(level)) { 
-        expDrop = expDropBossFormula(level); 
+Boss::Boss(const string& n,int level)
+    : Character(n, level) {
+        stats.hp = bossHp(level);
+        stats.maxHp = bossHp(level);
+        stats.resource = bossResource(level);
+        stats.maxResource = bossResource(level);
+        stats.attack = bossAtk(level);
+        stats.defense = bossDef(level);
+        stats.magic = bossMagic(level);
+        stats.resistance = bossResistance(level);
+    };
 
-        Attack.current = bossAtk(level);
-        Defense.current = bossDef(level);
-    }
+void Boss::setHpStat() { stats.maxHp = bossHp(stats.level); stats.maxHp = bossHp(stats.level); }
 
-void Boss::setHpStat() { maxHp = bossHp(level); hp = bossHp(level); }
+void Boss::setResourceStat() { stats.maxResource = bossResource(stats.level); stats.resource = bossResource(stats.level); }
 
-void Boss::setAtkStat() { Attack.current = bossAtk(level); }
+void Boss::setAtkStat() {stats.attack = bossAtk(stats.level); }
 
-void Boss::setDefStat() { Defense.current = bossDef(level); }
+void Boss::setDefStat() {stats.defense = bossDef(stats.level); }
+
+void Boss::setMagicStat() { stats.magic = bossMagic(stats.level); }
+
+void Boss::setResistanceStat() { stats.resistance = bossResistance(stats.level); }
