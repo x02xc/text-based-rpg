@@ -1,7 +1,7 @@
 #ifndef COMBAT_H
 #define COMBAT_H
 
-#include "character/Character.h"
+#include "Character/Character.h"
 #include <iostream>
 
 class Combat {

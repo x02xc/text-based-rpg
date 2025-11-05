@@ -8,7 +8,7 @@ TARGET := text_rpg.exe
 SRCS := \
     src/main.cpp \
     src/Game.cpp \
-    src/character/Character.cpp \
+    src/Character/Character.cpp \
     src/combat/Combat.cpp \
     src/skills/Skill.cpp \
     src/skills/DamageHp.cpp \
