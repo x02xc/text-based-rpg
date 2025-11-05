@@ -66,8 +66,8 @@ bool Combat::combatLoop() {
         int playerChoice = playerTurn();
         int enemyChoice = enemyTurn();
 
-        if (playerChoice == 1) { player->attack(*enemy); }
-        if (enemyChoice == 1) { enemy->attack(*player); }
+        // if (playerChoice == 1) { player->attack(*enemy); }
+        // if (enemyChoice == 1) { enemy->attack(*player); }
 
         player->reset();
         enemy->reset();

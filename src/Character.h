@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "formulas.hpp"
+#include "Formulas.hpp"
 #include "Skill.h"
 #include "Skills.hpp"
 #include "Stat.hpp"
@@ -21,7 +21,7 @@ protected:
     bool isAlive;
     bool isDefending;
     bool isMagic;
-    vector<Skill> skills;
+    vector<Skill*> skills;
 public:
     // Constructor / Destructor
     Character(string n,int l);
@@ -40,6 +40,8 @@ public:
     float getResource() const;
     float getAtk() const;
     float getDef() const;
+    float getMagic() const;
+    float getResistance() const;
     bool getIsMagic() const;
     bool getIsAlive() const;
     bool getIsDefending() const;
@@ -47,17 +49,24 @@ public:
     // setters
     void setHp(float h);
     void setResource(float r);
+    void setAttack(float atk);
+    void setDefense(float def);
+    void setMagic(float m);
+    void setResistance(float r);
     void setIsAlive(bool b);
     void setIsDefending(bool b);
     void setResource(float r);
 
-    // set stats
+    // set stats FOR LEVELING
     virtual void setHpStat() = 0;
     virtual void setResourceStat() = 0;
     virtual void setAtkStat() = 0;
     virtual void setDefStat() = 0;
     virtual void setMagicStat() = 0;
     virtual void setResistanceStat() = 0;
+
+    // perform action
+    void performAction(Character& target,Skill& skill);
 
     // full heal
     void fullHeal();

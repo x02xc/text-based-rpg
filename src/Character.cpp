@@ -2,7 +2,11 @@
 #include <iostream>
 
 // constructor
-Character::Character(string n, int l) : name(n) { stats.level = l; }
+Character::Character(string n, int l) : name(n) { 
+    stats.level = l; 
+    skills.emplace_back(basicAttack);
+    skills.emplace_back(basicDefend);
+}
 
 // destructor
 Character::~Character() {};
@@ -19,6 +23,8 @@ float Character::getMaxResource() const { return stats.maxResource; }
 float Character::getResource() const { return resource; }
 float Character::getAtk() const { return stats.attack; }
 float Character::getDef() const { return stats.defense; }
+float Character::getMagic() const { return stats.magic; }
+float Character::getResistance() const { return stats.resistance; }
 bool Character::getIsMagic() const { return isMagic; }
 bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
@@ -26,9 +32,20 @@ bool Character::getIsDefending() const { return isDefending; }
 // setters
 void Character::setHp(float h) { stats.hp = h; }
 void Character::setResource(float r) { resource = r; }
+void Character::setAttack(float atk) { stats.attack = atk; }
+void Character::setDefense(float def) { stats.defense = def; }
 void Character::setIsAlive(bool b) { isAlive = b; }
 void Character::setIsDefending(bool b) { isDefending = b; }
-void Character::setResource(float r) { resource = r; }
+
+void Character::performAction(Character& target, Skill& skill) {
+    // check if character can use skill
+    skill.canUse(*this);
+
+    // decrease resource
+    setResource(stats.resource - skill.getCost());
+
+    
+}
 
 void Character::fullHeal() {
     if (!isAlive) return;

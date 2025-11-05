@@ -1,0 +1,13 @@
+#ifndef DAMAGEHP_H
+#define DAMAGEHP_H
+
+#include "Skill.h"
+
+class DamageHp : public Skill {
+public:
+    DamageHp(bool magic, float p, float c);
+
+    void useSkill(Character& source, Character& target) override;
+};
+
+#endif
