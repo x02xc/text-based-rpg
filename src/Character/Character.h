@@ -45,7 +45,7 @@ public:
     bool getIsMagic() const;
     bool getIsAlive() const;
     bool getIsDefending() const;
-    vector<Skill*> getSkills() const;
+    const vector<Skill*>& getSkills();
 
     // setters
     void setHp(float h);
@@ -65,9 +65,6 @@ public:
     virtual void setMagicStat() = 0;
     virtual void setResistanceStat() = 0;
 
-    // perform action
-    void performAction(Character& target,Skill& skill);
-
     // full heal
     void fullHeal();
 
@@ -77,7 +74,7 @@ public:
     // reset
     void resetIsDefending();
 
-    void canLevel(Character& target);
+    void canLevel(float xp);
 
     void levelUp();
 

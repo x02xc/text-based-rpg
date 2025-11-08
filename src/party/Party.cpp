@@ -1,6 +1,7 @@
 #include "party.h"
 
-Party::Party() {};
+Party::Party(vector<Character*> members)
+    : party(members) {}
 
 vector<Character*> Party::getParty() const { return party; }
 
@@ -10,10 +11,9 @@ Character* Party::operator[](int index) const {
 
 size_t Party::getPartySize() const { return party.size(); }
 
-void Party::printMemberNames() const {
-    cout << " | ";
+void Party::printPartyInfo() const {
     for (int i = 0; i < party.size(); i++) {
-        cout << party[i]->getName() << " | ";
+        party[i]->printInfo();
     }
 }
 
@@ -23,4 +23,11 @@ void Party::insertMember(Character* member) {
 
 void Party::removeMember(int index) {
     party.erase(party.begin() + index);
+}
+
+bool Party::getIsAlive() const {
+    for (int i = 0; i < party.size(); i++) {
+        if(party[i]->getIsAlive()) { return true; }
+    }
+    return false;
 }

@@ -2,23 +2,33 @@
 #define COMBAT_H
 
 #include "Character/Character.h"
-#include "Party.h"
+#include "party/Party.h"
+#include "Action.h"
 #include <iostream>
 
 struct Combat {
     Party playerParty;
     Party enemyParty;
+    vector<Character*> validTargets;
     int turnCount;
 
     Combat(Party player, Party enemy);
 
     void printTurn() const;
-    void endInfo(Party player, Party enemy) const;
+    void endInfo(Party *winner, Party *loser) const;
     void battleStart() const;
 
-    // each turn returns the skill the player or the enemy picks for that turn
-    Skill* playerChoice();
-    Skill* enemyChoice();
+    void getValidTargets(Character* source, Skill* skill);
+
+    Character* getPlayerTarget(Character* source, Skill* skill);
+    Skill* getPlayerSkill(Character* source);
+
+    Character* getEnemyTarget(Character* source, Skill* skill);
+    Skill* getEnemySkill(Character* source);
+
+    void performAction(Character* source,Character* target,Skill* skill);
+
+    void processTurn(Party player, Party enemy);
 
     bool combatLoop();
 };

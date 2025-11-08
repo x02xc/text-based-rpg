@@ -8,7 +8,7 @@ class Party {
 private:
     vector<Character*> party;
 public:
-    Party();
+    Party(vector<Character*> members);
 
     vector<Character*> getParty() const;
     
@@ -16,11 +16,13 @@ public:
 
     size_t getPartySize() const;
 
-    void printMemberNames() const;
+    void printPartyInfo() const;
 
     void insertMember(Character* member);
 
     void removeMember(int index);
+
+    bool getIsAlive() const;
 };
 
 #endif
