@@ -17,7 +17,6 @@ protected:
     float exp; // TODO - progression struct (similar to stats) (would need refactoring for leveling system)
     float nextLevel;
     float expDrop;
-    float resource;
     bool isAlive;
     bool isDefending;
     bool isMagic;
@@ -36,26 +35,27 @@ public:
     float getExpDrop() const;
     float getMaxHp() const;
     float getHp() const;
-    float getMaxResource() const;
     float getResource() const;
+    float getMaxResource() const;
     float getAtk() const;
     float getDef() const;
     float getMagic() const;
     float getResistance() const;
-    bool getIsMagic() const;
     bool getIsAlive() const;
     bool getIsDefending() const;
+    bool getIsMagic() const;
     const vector<Skill*>& getSkills();
 
     // setters
     void setHp(float h);
-    void setResource(float r);
     void setAttack(float atk);
     void setDefense(float def);
+    void setResource(float r);
     void setMagic(float m);
     void setResistance(float r);
     void setIsAlive(bool b);
     void setIsDefending(bool b);
+    void setIsMagic(bool b);
 
     // set stats FOR LEVELING
     virtual void setHpStat() = 0;

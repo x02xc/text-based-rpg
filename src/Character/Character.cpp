@@ -5,7 +5,8 @@
 #include <iostream>
 
 // constructor
-Character::Character(string n, int l) : name(n) { 
+Character::Character(string n, int l) 
+    : name(n), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isAlive(true), isDefending(false) { 
     stats.level = l;
     skills.emplace_back(&BasicAttack);
     skills.emplace_back(&BasicDefend);
@@ -19,24 +20,25 @@ float Character::getNextLevel() const { return nextLevel; }
 float Character::getExpDrop() const { return expDrop; }
 float Character::getMaxHp() const { return stats.maxHp; }
 float Character::getHp() const { return stats.hp; }
+float Character::getResource() const { return stats.resource; }
 float Character::getMaxResource() const { return stats.maxResource; }
-float Character::getResource() const { return resource; }
 float Character::getAtk() const { return stats.attack; }
 float Character::getDef() const { return stats.defense; }
 float Character::getMagic() const { return stats.magic; }
 float Character::getResistance() const { return stats.resistance; }
-bool Character::getIsMagic() const { return isMagic; }
 bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
+bool Character::getIsMagic() const { return isMagic; }
 const vector<Skill*>& Character::getSkills() { return skills; }
 
 // setters
 void Character::setHp(float h) { stats.hp = h; }
-void Character::setResource(float r) { (r < 0) ? resource = 0 : resource = r; }
+void Character::setResource(float r) { stats.resource = r; }
 void Character::setAttack(float atk) { stats.attack = atk; }
 void Character::setDefense(float def) { stats.defense = def; }
 void Character::setIsAlive(bool b) { isAlive = b; }
 void Character::setIsDefending(bool b) { isDefending = b; }
+void Character::setIsMagic(bool b) { isMagic = b; }
 
 void Character::fullHeal() {
     if (!isAlive) return;
@@ -85,7 +87,7 @@ void Character::printInfo() const {
 }
 
 void Character::printSkills() const {
-    for (int i = 0; i < skills.size(); i++) {
+    for (size_t i = 0; i < skills.size(); i++) {
         cout << i + 1 << ") " << skills[i] << endl;
     }
 }

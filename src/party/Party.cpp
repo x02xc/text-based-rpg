@@ -12,7 +12,8 @@ Character* Party::operator[](int index) const {
 size_t Party::getPartySize() const { return party.size(); }
 
 void Party::printPartyInfo() const {
-    for (int i = 0; i < party.size(); i++) {
+    cout << "test" << endl;
+    for (size_t i = 0; i < party.size(); i++) {
         party[i]->printInfo();
     }
 }
@@ -26,13 +27,13 @@ void Party::removeMember(int index) {
 }
 
 void Party::healParty() {
-    for(int i = 0; i < party.size(); i++) {
+    for(size_t i = 0; i < party.size(); i++) {
         party[i]->fullHeal();
     }
 }
 
 bool Party::getIsAlive() const {
-    for (int i = 0; i < party.size(); i++) {
+    for (size_t i = 0; i < party.size(); i++) {
         if(party[i]->getIsAlive()) { return true; }
     }
     return false;

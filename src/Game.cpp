@@ -1,6 +1,7 @@
 #include "Game.h"
 
-Game::Game() {
+Game::Game()
+    : currentIndex(1) {
 
     arena.emplace_back(createEnemyParty(1));
     arena.emplace_back(createEnemyParty(2));
@@ -13,13 +14,13 @@ Game::Game() {
 
 Game::~Game() {
     // delete player party
-    for (int i = 0; i < playerParty.getPartySize(); i++) {
+    for (size_t i = 0; i < playerParty.getPartySize(); i++) {
         delete playerParty[i];
     }
 
     // delete arena
-    for (int i = 0; i < arena.size(); i++) {
-        for (int j = 0; i < arena[i].getPartySize(); j++) {
+    for (size_t i = 0; i < arena.size(); i++) {
+        for (size_t j = 0; i < arena[i].getPartySize(); j++) {
             delete arena[i].getParty()[j];
         }
     }
@@ -27,9 +28,6 @@ Game::~Game() {
 
 // TODO - Make More Sophisticated
 vector<Character*> Game::createEnemyParty(int level) {
-
-    // TODO - FIX POSSIBLE COMPILER ERROR
-    // - Storing pointers but actual variable is destoryed.
 
     vector<Character*> party;
 
@@ -42,12 +40,10 @@ vector<Character*> Game::createEnemyParty(int level) {
 }
 
 void Game::createPlayerParty() {
-    vector<Character*> party;
     int choice;
 
     // create player party
     for (int i = 0; i < 4; i++) {
-        Character* newPartyMember;
 
         // prompt for member name
         string name;
@@ -66,20 +62,15 @@ void Game::createPlayerParty() {
             cin >> choice;
 
             if (choice < 1 || choice > 4) { cout << "Invalid Option.\n"; }
-
-            endLoop = true;
+            else { endLoop = true; }
         }
 
-        if (choice == 1) { newPartyMember = new Warrior(name,1); }
-        if (choice == 2) { newPartyMember = new Mage(name,1); }
-        if (choice == 3) { newPartyMember = new Archer(name,1); }
-        if (choice == 4) { newPartyMember = new Healer(name,1); }
-
-        playerParty.insertMember(newPartyMember);
+        if (choice == 1) { playerParty.insertMember(new Warrior(name,1)); }
+        if (choice == 2) { playerParty.insertMember(new Mage(name,1)); }
+        if (choice == 3) { playerParty.insertMember(new Archer(name,1)); }
+        if (choice == 4) { playerParty.insertMember(new Healer(name,1)); }
 
     }
-
-    playerParty = party;
 
 }
 
