@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "../Formulas.hpp"
 #include "../skills/Skill.h"
 #include "../skills/SkillList.h"
@@ -10,7 +11,14 @@
 
 using namespace std;
 
-// TODO - Store Character Class Type in Character (for printing info)
+enum class ClassType{
+    Warrior,
+    Mage,
+    Archer,
+    Healer,
+    Boss,
+    Enemy
+};
 
 class Character {
 protected:
@@ -23,6 +31,7 @@ protected:
     bool isDefending;
     bool isMagic;
     vector<Skill*> skills;
+    ClassType characterClass;
 public:
     // Constructor / Destructor
     Character(string n,int l);
@@ -84,6 +93,8 @@ public:
     void printInfo() const;
 
     void printSkills() const;
+
+    virtual void printClass() const = 0;
 };
 
 #endif

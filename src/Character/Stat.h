@@ -10,5 +10,4 @@ struct Stats {
     float magic; float resistance;
 };
 
-enum class ClassType { Warrior, Mage, Archer, Healer};
 enum class ResourceType { Mana, Stamina};

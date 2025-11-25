@@ -10,6 +10,8 @@ Healer::Healer(const string& n,int level)
         stats.defense = healerDef(level);
         stats.magic = healerMagic(level);
         stats.resistance = healerResistance(level);
+
+        characterClass = ClassType::Healer;
     };
 
 void Healer::setHpStat() { stats.maxHp = healerHp(stats.level); stats.hp = healerHp(stats.level); }
@@ -23,3 +25,5 @@ void Healer::setDefStat() {stats.defense = healerDef(stats.level); }
 void Healer::setMagicStat() { stats.magic = healerMagic(stats.level); }
 
 void Healer::setResistanceStat() { stats.resistance = healerResistance(stats.level); }
+
+void Healer::printClass() const { std::cout << "Healer"; }

@@ -10,6 +10,8 @@ Archer::Archer(const string& n,int level)
         stats.defense = archerDef(level);
         stats.magic = archerMagic(level);
         stats.resistance = archerResistance(level);
+
+        characterClass = ClassType::Archer;
     };
 
 void Archer::setHpStat() { stats.maxHp = archerHp(stats.level); stats.hp = archerHp(stats.level); }
@@ -23,3 +25,5 @@ void Archer::setDefStat() {stats.defense = archerDef(stats.level); }
 void Archer::setMagicStat() { stats.magic = archerMagic(stats.level); }
 
 void Archer::setResistanceStat() { stats.resistance = archerResistance(stats.level); }
+
+void Archer::printClass() const { std::cout << "Archer"; }

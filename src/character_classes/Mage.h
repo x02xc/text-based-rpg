@@ -13,6 +13,8 @@ public:
     void setDefStat() override;
     void setMagicStat() override;
     void setResistanceStat() override;
+
+    void printClass() const override;
 };
 
 #endif

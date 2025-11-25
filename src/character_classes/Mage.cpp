@@ -10,6 +10,8 @@ Mage::Mage(const string& n,int level)
         stats.defense = mageDef(level);
         stats.magic = mageMagic(level);
         stats.resistance = mageResistance(level);
+
+        characterClass = ClassType::Mage;
     };
 
 void Mage::setHpStat() { stats.maxHp = mageHp(stats.level); stats.hp = mageHp(stats.level); }
@@ -23,3 +25,5 @@ void Mage::setDefStat() {stats.defense = mageDef(stats.level); }
 void Mage::setMagicStat() { stats.magic = mageMagic(stats.level); }
 
 void Mage::setResistanceStat() { stats.resistance = mageResistance(stats.level); }
+
+void Mage::printClass() const { std::cout << "Mage"; }

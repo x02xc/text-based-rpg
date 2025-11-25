@@ -10,6 +10,8 @@ Enemy::Enemy(const string& n,int level)
         stats.defense = enemyDef(level);
         stats.magic = enemyMagic(level);
         stats.resistance = enemyResistance(level);
+
+        characterClass = ClassType::Enemy;
     };
 
 void Enemy::setHpStat() { stats.maxHp = enemyHp(stats.level); stats.hp = enemyHp(stats.level); }
@@ -23,3 +25,5 @@ void Enemy::setDefStat() {stats.defense = enemyDef(stats.level); }
 void Enemy::setMagicStat() { stats.magic = enemyMagic(stats.level); }
 
 void Enemy::setResistanceStat() { stats.resistance = enemyResistance(stats.level); }
+
+void Enemy::printClass() const { std::cout << "Enemy"; }

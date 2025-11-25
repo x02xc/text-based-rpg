@@ -10,6 +10,8 @@ Warrior::Warrior(const string& n,int level)
         stats.defense = warriorDef(level);
         stats.magic = warriorMagic(level);
         stats.resistance = warriorResistance(level);
+
+        characterClass = ClassType::Warrior;
     };
 
 void Warrior::setHpStat() { stats.maxHp = warriorHp(stats.level); stats.hp = warriorHp(stats.level); }
@@ -23,3 +25,5 @@ void Warrior::setDefStat() {stats.defense = warriorDef(stats.level); }
 void Warrior::setMagicStat() { stats.magic = warriorMagic(stats.level); }
 
 void Warrior::setResistanceStat() { stats.resistance = warriorResistance(stats.level); }
+
+void Warrior::printClass() const { std::cout << "Warrior"; }

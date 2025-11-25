@@ -2,7 +2,6 @@
 #include "../skills/SkillList.h"
 #include "../skills/BuffDef.h"
 #include "../skills/DamageHp.h"
-#include <iostream>
 
 // constructor
 Character::Character(string n, int l) 
@@ -78,7 +77,9 @@ void Character::canLevel(float xp) {
 
 // print info
 void Character::printInfo() const {
-    cout << "===== " << name << " =====\n";
+    cout << "===== " << name << " ( ";
+    printClass();
+    cout << " ) =====\n";
     cout << "LEVEL: " << stats.level << " (" << exp << "exp / " << nextLevel << "exp)" << " | ";
     cout << "HP: " << stats.hp << " / " << stats.maxHp << " | ";
     cout << "ATK: " << stats.attack << " | ";
@@ -91,6 +92,6 @@ void Character::printInfo() const {
 
 void Character::printSkills() const {
     for (size_t i = 0; i < skills.size(); i++) {
-        cout << i + 1 << ") " << skills[i] << endl;
+        cout << i + 1 << ") " << skills[i]->getName() << endl;
     }
 }

@@ -34,7 +34,7 @@ void Combat::battleStart() const {
     cout << "VS\n";
     // Print Enemy Party
     for (size_t i = 0; i < enemyParty.getPartySize(); i++) { cout << enemyParty[i]->getName() << " "; } 
-    cout << "====================================" << endl << endl;
+    cout << endl << "====================================" << endl << endl;
 }
 
 void Combat::getValidTargets(Character* source, Skill* skill) {
@@ -195,7 +195,7 @@ bool Combat::combatLoop() {
 
     cout << "==== Player Party =====\n";
     playerParty.printPartyInfo();
-    cout << "==== Enemy Party =====\n";
+    cout << endl << "==== Enemy Party =====\n";
     enemyParty.printPartyInfo();
     cout << endl;
 

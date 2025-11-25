@@ -1,6 +1,8 @@
 #ifndef SKILL_H
 #define SKILL_H
 
+#include <string>
+
 enum class TargetType {
     SELF,
     ONE_ALLY,
@@ -13,16 +15,18 @@ class Character;
 
 class Skill {
 protected:
+    std::string name;
     bool isMagic;
     float points;
     float cost;
     TargetType targetType;
 public:
     // constructor / destructor
-    Skill(bool magic, float p, float c, TargetType tt);
+    Skill(std::string n, bool magic, float p, float c, TargetType tt);
     virtual ~Skill();
 
     // getters
+    std::string getName() const;
     bool getIsMagic() const;
     float getPoints() const;
     float getCost() const;
