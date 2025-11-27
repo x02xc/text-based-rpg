@@ -68,6 +68,8 @@ public:
     void setIsDefending(bool b);
     void setIsMagic(bool b);
 
+    typedef float(*construct_attack)(int level);
+
     // set stats FOR LEVELING
     virtual void setHpStat() = 0;
     virtual void setResourceStat() = 0;

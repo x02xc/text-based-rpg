@@ -22,11 +22,15 @@ public:
     Game();
     ~Game();
 
+    static Game& getInstance();
+
     vector<Character*> createEnemyParty(int level);
     
     void createPlayerParty();
 
     void printMenu() const;
+
+    void clearConsole() const;
 
     void gameLoop();
 };

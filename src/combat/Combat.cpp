@@ -62,7 +62,7 @@ Character* Combat::getPlayerTarget(Character* source, Skill* skill) {
         cout << "Choose your target: " << endl;
         for (size_t i = 0; i < validTargets.size(); i++) {
             cout << i+1 << ") " << validTargets[i]->getName()
-                << " | HP: " << validTargets[i]->getHp() << " / " << validTargets[i]->getMaxHp(); 
+                << " | HP: " << validTargets[i]->getHp() << " / " << validTargets[i]->getMaxHp() << endl;
         }
         cout << ">";
 

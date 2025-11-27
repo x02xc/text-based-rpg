@@ -26,6 +26,11 @@ Game::~Game() {
     }
 }
 
+Game& Game::getInstance() {
+    static Game Instance;
+    return Instance;
+}
+
 // TODO - Make More Sophisticated
 vector<Character*> Game::createEnemyParty(int level) {
 
@@ -58,7 +63,7 @@ void Game::createPlayerParty() {
             cout << "1) Warrior\n";
             cout << "2) Mage\n";
             cout << "3) Archer\n";
-            cout << "4) Healer\n";
+            cout << "4) Healer\n>";
             cin >> choice;
 
             if (choice < 1 || choice > 4) { cout << "Invalid Option.\n"; }
@@ -70,6 +75,8 @@ void Game::createPlayerParty() {
         if (choice == 3) { playerParty.insertMember(new Archer(name,1)); }
         if (choice == 4) { playerParty.insertMember(new Healer(name,1)); }
 
+        clearConsole();
+
     }
 
 }
@@ -80,6 +87,10 @@ void Game::printMenu() const {
     cout << "2. Print Party Stats\n";
     cout << "3. Quit\n";
     cout << ">";
+}
+
+void Game::clearConsole() const {
+    cout << "\033[2J";
 }
 
 void Game::gameLoop() {
