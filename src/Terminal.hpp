@@ -1,7 +1,13 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
+#if defined(_WIN32)
 #include <Windows.h>
+#elif defined(__OSX__)
+// OSX / Mac specific headers
+#elif defined(__linux__)
+// linux specific headers
+#endif
 
 #include <iostream>
 #include <sstream>
@@ -81,17 +87,17 @@ namespace terminal {
 
     // clear any text effect (underline, foreground, background, inversion)
     std::ostream& reset(std::ostream& os) {
-        os << "\x1b[0m";
+        os << ESCAPE << "0m";
         return os;
     }
 
     std::ostream& underline(std::ostream& os) {
-        os << "\x1b[4m";
+        os << ESCAPE << "4m";
         return os;
     }
 
     std::ostream& negative(std::ostream& os) {
-        os << "\x1b[7m";
+        os << ESCAPE << "7m";
         return os;
     }
 
