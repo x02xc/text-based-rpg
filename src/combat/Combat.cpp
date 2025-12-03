@@ -154,6 +154,8 @@ void Combat::processTurn(Party player, Party enemy) {
 
     // get choice from each player party member
     for (size_t i = 0; i < player.getPartySize(); i++ ) {
+        if (!player[i]->getIsAlive()) { continue; }
+
         Skill* skill = getPlayerSkill(player[i]);
         Character* target = getPlayerTarget(player[i],skill);
         actionQueue.push(Action(player[i],target,skill));
@@ -174,6 +176,8 @@ void Combat::processTurn(Party player, Party enemy) {
 
     // get choice from each player party member
     for (size_t i = 0; i < enemy.getPartySize(); i++) {
+        if (!enemy[i]->getIsAlive()) { continue; }
+
         Skill* skill = getEnemySkill(enemy[i]);
         Character* target = getEnemyTarget(enemy[i],skill);
         actionQueue.push(Action(enemy[i],target,skill));
