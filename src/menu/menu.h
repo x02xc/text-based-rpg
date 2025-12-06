@@ -14,4 +14,12 @@ public:
     void getMenuMessage() const;
 };
 
-// TODO - Add Battle Menu Derived Class
+class MainMenu : public Menu {
+public:
+    MainMenu(std::string msg);
+};
+
+class SkillMenu : public Menu {
+public:
+    SkillMenu(std::string msg);
+};
