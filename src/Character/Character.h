@@ -56,6 +56,7 @@ public:
     bool getIsDefending() const;
     bool getIsMagic() const;
     const vector<Skill*>& getSkills();
+    size_t getSkillListSize() const;
 
     // setters
     void setHp(float h);

@@ -11,6 +11,9 @@ struct Combat {
     Party enemyParty;
     vector<Character*> validTargets;
     int turnCount;
+    queue<Action> actionQueue;
+    Character* source;
+    Character* target;
     MenuState currentMenuState;
 
     Combat(Party player, Party enemy);

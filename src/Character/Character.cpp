@@ -29,6 +29,7 @@ bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
 bool Character::getIsMagic() const { return isMagic; }
 const vector<Skill*>& Character::getSkills() { return skills; }
+size_t Character::getSkillListSize() const { return skills.size(); }
 
 // setters
 void Character::setHp(float h) { stats.hp = h; }

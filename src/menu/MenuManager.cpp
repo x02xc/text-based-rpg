@@ -1,25 +1,31 @@
 #include "MenuManager.h"
 #include <cstdlib>
 
-MenuManager::MenuManager() {
-}
+MenuManager::MenuManager(GameData *gm)
+:   gameData(gm) {}
 
-void MenuManager::createMainMenu(Party &party) {
+void MenuManager::createMainMenu() {
     menuStack.emplace("Choose an Option:\n",std::vector<Command>{
         {"Fight",[this]() { createFightMenu(); }}, // TODO - fix
-        {"Print Party Stats",[party]() { party.printPartyInfo(); }},
+        {"Print Party Stats",[this]() { gameData->playerParty.printPartyInfo(); }},
         {"Quit",[this]() { exit(0); }}
     });
 }
 
-void MenuManager::createFightMenu(Party &playerParty,Party &enemyParty) {
+void MenuManager::createFightMenu() {
     menuStack.emplace("Choose an Option:\n",std::vector<Command>{
         {"Fight",[this]() { createSelectSkillMenu(); }},
-        {"Print Battle Info",[playerParty,enemyParty]() { 
+        {"Print Battle Info",[this]() { 
             cout << "==== Player Party =====\n";
-            playerParty.printPartyInfo();
+            gameData->playerParty.printPartyInfo();
             cout << endl << "==== Enemy Party =====\n";
-            enemyParty.printPartyInfo();
+            gameData->arena[gameData->currentIndex].printPartyInfo();
         }}
     });
+}
+
+void MenuManager::createSelectSkillMenu() {
+    menuStack.emplace("Choose a Skill:\n",std::vector<Command>{});
+
+    gameData->currentBattle.actionQueue.emplace();
 }
