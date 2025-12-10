@@ -37,7 +37,3 @@ void Menu::runMenu() {
         options[choice - 1].command();
     }
 }
-
-MainMenu::MainMenu(std::string&& msg,std::vector<Command>& opts) {
-    
-}

@@ -25,7 +25,31 @@ void MenuManager::createFightMenu() {
 }
 
 void MenuManager::createSelectSkillMenu() {
-    menuStack.emplace("Choose a Skill:\n",std::vector<Command>{});
+    std::vector<Command> skillMenuOptions;
 
-    gameData->currentBattle.actionQueue.emplace();
+    for(int i = 0; i < gameData->playerParty[gameData->partyIndex]->getSkillListSize(); i++) {
+        std::string commandName = gameData->playerParty[gameData->partyIndex]->getSkills()[i]->getName();
+
+        skillMenuOptions.emplace_back(Command{
+            commandName,
+            [this,i]() { 
+                auto pickedSkill = gameData->playerParty[gameData->partyIndex]->getSkills()[i];
+                if(pickedSkill != nullptr) { gameData->currentBattle.actionQueue.emplace(pickedSkill); }
+             }
+        });
+
+        if(gameData->partyIndex != 0) {
+            skillMenuOptions.emplace_back(Command{
+                "[BACK]",
+                [this]() { 
+                    gameData->partyIndex--;
+                    createSelectSkillMenu();
+                }
+            });
+        }
+        
+    }
+    menuStack.emplace("Choose a Move: ",skillMenuOptions);
+
+    createSelectTargetMenu();
 }

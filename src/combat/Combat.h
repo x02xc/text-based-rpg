@@ -26,7 +26,7 @@ struct Combat {
     void getValidTargets(Character* source, Skill* skill, Party sourceParty, Party opposingParty);
 
     Character* getPlayerTarget();
-    Skill* getPlayerSkill();
+    void getPlayerSkill();
 
     Character* getEnemyTarget(Character* source, Skill* skill);
     Skill* getEnemySkill(Character* source);

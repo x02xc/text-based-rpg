@@ -84,7 +84,7 @@ Character* Combat::getPlayerTarget() {
 }
 
 // player turn
-Skill* Combat::getPlayerSkill() {
+void Combat::getPlayerSkill() {
     // temp variable for vector or skills
     const vector<Skill*>& skillList = source->getSkills();
     Skill* pickedSkill;

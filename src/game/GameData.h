@@ -11,8 +11,5 @@ struct GameData {
     vector<Party> arena;
     int currentIndex;
     int partyIndex;
-    Character* source;
-    Character* target;
-    queue<Action> actionQueue;
     Combat currentBattle;
 };
