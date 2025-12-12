@@ -42,12 +42,14 @@ void MenuManager::createSelectSkillMenu() {
         });
     }
 
+
+
     // back command - only added if not the first party member
-    if(gameData->partyIndex != 0) {
+    if(gameData->partyIndex != getFirstPartyIndex()) {
         skillMenuOptions.emplace_back(Command{
             "[BACK]",
-            [this]() { 
-                gameData->partyIndex--;
+            [this]() {
+                prevPartyMember();
                 createSelectSkillMenu();
             }
         });
@@ -76,8 +78,7 @@ void MenuManager::createSelectTargetMenu() {
                     gameData->currentBattle.skill
                 ));
 
-                if(gameData->partyIndex == gameData->)
-                gameData->partyIndex++;
+                // TODO - Add increment to next index
                 menuStack.pop();
             }
         });
@@ -92,3 +93,50 @@ void MenuManager::createSelectTargetMenu() {
 
 // TODO - Add checks for party index - no dead members allowed to pick skill
 // TODO - Finish createSelectTargetMenu()
+
+// ------------------------------------->
+
+int MenuManager::getFirstPartyIndex() {
+    for(int i = 0; i < gameData->playerParty.getPartySize(); i++) {
+        if(!gameData->playerParty[i]->getIsAlive()) { continue; }
+        return i;
+    }
+}
+
+int MenuManager::getLastPartyIndex() {
+    for(int i = gameData->playerParty.getPartySize() - 1; i >= 0; i--) {
+        if(!gameData->playerParty[i]->getIsAlive()) { continue; }
+        return i;
+    }
+}
+
+bool MenuManager::nextPartyMember() {
+    int currentPartyIndex = gameData->partyIndex;
+    bool validPartyIndex{};
+
+    for(currentPartyIndex; !validPartyIndex; currentPartyIndex++) {
+        if(gameData->playerParty.getPartySize() == currentPartyIndex + 1) { break; }
+        if(!gameData->playerParty[currentPartyIndex + 1]->getIsAlive()) { continue; }
+
+        gameData->partyIndex++;
+        validPartyIndex = true;
+    }
+
+    return validPartyIndex;
+
+}
+
+bool MenuManager::prevPartyMember() {
+    int currentPartyIndex = gameData->partyIndex;
+    bool validPartyIndex{};
+
+    for(currentPartyIndex; !validPartyIndex; currentPartyIndex++) {
+        if(gameData->playerParty.getPartySize() == currentPartyIndex - 1) { break; }
+        if(!gameData->playerParty[currentPartyIndex - 1]->getIsAlive()) { continue; }
+
+        gameData->partyIndex--;
+        validPartyIndex = true;
+    }
+
+    return validPartyIndex;
+}

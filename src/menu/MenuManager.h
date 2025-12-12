@@ -15,7 +15,14 @@ public:
     void nextMenu(const Menu &menu);
     void prevMenu();
 
+    bool nextPartyMember();
+    bool prevPartyMember();
+
+    int getFirstPartyIndex();
+    int getLastPartyIndex();
+
     void createMainMenu();
+
     void createFightMenu();
     void createSelectSkillMenu();
     void createSelectTargetMenu();
