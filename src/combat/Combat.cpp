@@ -147,22 +147,10 @@ void Combat::performAction(Character* source, Character* target, Skill* skill) {
     if(target->getHp() <= 0) { target->setIsAlive(false); cout << target->getName() << " has fallen!\n"; }
 }
 
-void Combat::processTurn(Party player, Party enemy) {
-    // action queue
-    queue<Action> actionQueue;
+void Combat::processTurn() {
 
-    // PLAYER MOVE
     // TODO - reset or decrement status effect for player party
-
-    // get choice from each player party member
-    for (size_t i = 0; i < player.getPartySize(); i++ ) {
-        if (!player[i]->getIsAlive()) { continue; }
-
-        Skill* skill = getPlayerSkill();
-        Character* target = getPlayerTarget();
-        actionQueue.push(Action(player[i],target,skill));
-    }
-
+    
     // perform actions
     while(!actionQueue.empty()) {
         performAction(
@@ -173,16 +161,15 @@ void Combat::processTurn(Party player, Party enemy) {
         actionQueue.pop();
     }
 
-    // ENEMY MOVE
     // TODO - reset or decrement status effect for enemy party
 
     // get choice from each player party member
-    for (size_t i = 0; i < enemy.getPartySize(); i++) {
-        if (!enemy[i]->getIsAlive()) { continue; }
+    for (size_t i = 0; i < enemyParty.getPartySize(); i++) {
+        if (!enemyParty[i]->getIsAlive()) { continue; }
 
-        Skill* skill = getEnemySkill(enemy[i]);
-        Character* target = getEnemyTarget(enemy[i],skill);
-        actionQueue.push(Action(enemy[i],target,skill));
+        Skill* skill = getEnemySkill(enemyParty[i]);
+        Character* target = getEnemyTarget(enemyParty[i],skill);
+        actionQueue.push(Action(enemyParty[i],target,skill));
     }
 
     // perform actions

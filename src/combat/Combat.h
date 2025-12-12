@@ -35,7 +35,7 @@ struct Combat {
 
     void performAction(Character* source,Character* target,Skill* skill);
 
-    void processTurn(Party player, Party enemy);
+    void processTurn();
 
     bool combatLoop();
 };

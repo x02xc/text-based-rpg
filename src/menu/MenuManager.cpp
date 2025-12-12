@@ -14,12 +14,15 @@ void MenuManager::createMainMenu() {
 
 void MenuManager::createFightMenu() {
     menuStack.emplace("Choose an Option:\n",std::vector<Command>{
-        {"Fight",[this]() { createSelectSkillMenu(); }},
+        {"Fight",[this]() { 
+            gameData->currentBattle = Combat(gameData->playerParty,gameData->arena[gameData->arenaIndex]);
+            gameData->currentBattle.combatLoop();
+        }},
         {"Print Battle Info",[this]() { 
             cout << "==== Player Party =====\n";
             gameData->playerParty.printPartyInfo();
             cout << endl << "==== Enemy Party =====\n";
-            gameData->arena[gameData->currentIndex].printPartyInfo();
+            gameData->arena[gameData->arenaIndex].printPartyInfo();
         }}
     });
 }
@@ -78,7 +81,9 @@ void MenuManager::createSelectTargetMenu() {
                     gameData->currentBattle.skill
                 ));
 
-                // TODO - Add increment to next index
+                // if false, there's no more party members, so invoke processTurn()
+                if(!nextPartyMember()) { gameData->currentBattle.processTurn(); }
+
                 menuStack.pop();
             }
         });

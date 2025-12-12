@@ -9,7 +9,7 @@ struct GameData {
     Party playerParty;
     Party bossParty;
     vector<Party> arena;
-    int currentIndex;
+    int arenaIndex;
     int partyIndex;
     Combat currentBattle;
 };
