@@ -7,7 +7,7 @@
 
 // constructor
 Combat::Combat(Party player, Party enemy)
-    : playerParty(player), enemyParty(enemy), turnCount(1), currentMenuState(MenuState::FIGHT_MENU) {}
+    : playerParty(player), enemyParty(enemy), turnCount(1) {}
 
 // print info
 void Combat::printTurn() const {
@@ -62,7 +62,7 @@ void Combat::getValidTargets(Party sourceParty, Party opposingParty) {
     }
 }
 
-Character* Combat::getEnemyTarget(Character* source, Skill* skill) {
+Character* Combat::getEnemyTarget() {
     getValidTargets(enemyParty,playerParty);
 
     // TODO - Make more sophisticated
@@ -117,7 +117,7 @@ void Combat::processTurn() {
         if (!enemyParty[i]->getIsAlive()) { continue; }
 
         Skill* skill = getEnemySkill(enemyParty[i]);
-        Character* target = getEnemyTarget(enemyParty[i],skill);
+        Character* target = getEnemyTarget();
         actionQueue.push(Action(enemyParty[i],target,skill));
     }
 
@@ -131,53 +131,4 @@ void Combat::processTurn() {
         actionQueue.pop();
     }
 
-}
-
-// combat loop
-bool Combat::combatLoop() {
-    Party* winner;
-    Party* loser;
-
-    
-
-    battleStart();
-
-    std::cout << "==== Player Party =====\n";
-    playerParty.printPartyInfo();
-    std::cout << endl << "==== Enemy Party =====\n";
-    enemyParty.printPartyInfo();
-    std::cout << endl;
-
-    while(playerParty.getIsAlive() && enemyParty.getIsAlive()) {
-        printTurn();
-
-        
-
-        turnCount++;
-    }
-
-    if (playerParty.getIsAlive()) { 
-        winner = &playerParty; 
-        loser = &enemyParty; 
-
-        float expDropped;
-        for (size_t i = 0; i < loser->getPartySize(); i++) {
-            expDropped += (*loser)[i]->getExpDrop();
-        }
-
-        expDropped /= winner->getPartySize();
-
-        for (size_t i = 0; i < winner->getPartySize(); i++) {
-            (*winner)[i]->canLevel(expDropped);
-        }
-
-        endInfo(winner);
-        return true; 
-    }
-    else { 
-        winner = &enemyParty; 
-        loser = &playerParty; 
-        endInfo(winner);
-        return false; 
-    }
 }

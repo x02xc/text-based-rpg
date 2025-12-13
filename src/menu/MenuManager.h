@@ -17,8 +17,8 @@ public:
     bool nextPartyMember();
     bool prevPartyMember();
 
-    int getFirstPartyIndex();
-    int getLastPartyIndex();
+    size_t getFirstPartyIndex();
+    size_t getLastPartyIndex();
 
     void createMainMenu();
     

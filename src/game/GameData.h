@@ -5,11 +5,17 @@
 #include "../combat/Combat.h"
 #include <queue>
 
+enum class GameState{
+    MAIN_MENU,
+    BATTLE
+};
+
 struct GameData {
     Party playerParty{};
     Party bossParty{};
     vector<Party> arena{};
-    int arenaIndex = 0;
-    int partyIndex = 0;
+    size_t arenaIndex = 0;
+    size_t partyIndex = 0;
     Combat currentBattle{};
+    GameState state = GameState::MAIN_MENU;
 };

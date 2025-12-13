@@ -4,8 +4,8 @@
 #include "../character/Character.h"
 #include "../party/Party.h"
 #include "Action.h"
-#include "../menu/MenuManager.h"
 #include <iostream>
+#include <queue>
 
 struct Combat {
     Party playerParty;
@@ -16,8 +16,8 @@ struct Combat {
     Character* source;
     Character* target;
     Skill* skill;
-    MenuState currentMenuState;
 
+    Combat() = default;
     Combat(Party player, Party enemy);
 
     void printTurn() const;
@@ -26,7 +26,7 @@ struct Combat {
 
     void getValidTargets(Party sourceParty, Party opposingParty);
 
-    Character* getEnemyTarget(Character* source, Skill* skill);
+    Character* getEnemyTarget();
     Skill* getEnemySkill(Character* source);
 
     void fightMenu();
@@ -34,8 +34,6 @@ struct Combat {
     void performAction(Character* source,Character* target,Skill* skill);
 
     void processTurn();
-
-    bool combatLoop();
 };
 
 #endif

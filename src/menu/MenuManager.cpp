@@ -16,12 +16,13 @@ void MenuManager::createFightMenu() {
     menuStack.emplace("Choose an Option:\n",std::vector<Command>{
         {"Fight",[this]() { 
             gameData->currentBattle = Combat(gameData->playerParty,gameData->arena[gameData->arenaIndex]);
-            gameData->currentBattle.combatLoop();
+            gameData->state = GameState::BATTLE;
+            while(!menuStack.empty()) { menuStack.pop(); }
         }},
         {"Print Battle Info",[this]() { 
-            cout << "==== Player Party =====\n";
+            cout << "===== Player Party =====\n";
             gameData->playerParty.printPartyInfo();
-            cout << endl << "==== Enemy Party =====\n";
+            cout << endl << "===== Enemy Party =====\n";
             gameData->arena[gameData->arenaIndex].printPartyInfo();
         }}
     });
@@ -32,7 +33,7 @@ void MenuManager::createSelectSkillMenu() {
     std::vector<Command> skillMenuOptions;
 
     // looping over SkillListSize and adding each skill as a command in the skillMenuOptions vector
-    for(int i = 0; i < gameData->playerParty[gameData->partyIndex]->getSkillListSize(); i++) {
+    for(size_t i = 0; i < gameData->playerParty[gameData->partyIndex]->getSkillListSize(); i++) {
 
         skillMenuOptions.emplace_back(Command{
             gameData->playerParty[gameData->partyIndex]->getSkills()[i]->getName(),
@@ -68,7 +69,7 @@ void MenuManager::createSelectTargetMenu() {
     gameData->currentBattle.getValidTargets(gameData->currentBattle.playerParty,gameData->currentBattle.enemyParty);
 
     // loop over valid targets and add them to targetMenuOptions
-    for(int i = 0; i < gameData->currentBattle.validTargets.size(); i++) {
+    for(size_t i = 0; i < gameData->currentBattle.validTargets.size(); i++) {
         targetMenuOptions.emplace_back(Command{
             gameData->currentBattle.validTargets[i]->getName(),
             [this,i]() {
@@ -90,7 +91,7 @@ void MenuManager::createSelectTargetMenu() {
     // back command
     targetMenuOptions.emplace_back(Command{
         "[BACK]",
-        [this]() { menuStack.pop(); }
+        [this]() { menuStack.pop(); menuStack.pop(); }
     });
 
     menuStack.emplace("Choose a Target: ",targetMenuOptions);
@@ -101,25 +102,24 @@ void MenuManager::createSelectTargetMenu() {
 
 // ------------------------------------->
 
-int MenuManager::getFirstPartyIndex() {
-    for(int i = 0; i < gameData->playerParty.getPartySize(); i++) {
+size_t MenuManager::getFirstPartyIndex() {
+    for(size_t i = 0; i < gameData->playerParty.getPartySize(); i++) {
         if(!gameData->playerParty[i]->getIsAlive()) { continue; }
         return i;
     }
 }
 
-int MenuManager::getLastPartyIndex() {
-    for(int i = gameData->playerParty.getPartySize() - 1; i >= 0; i--) {
+size_t MenuManager::getLastPartyIndex() {
+    for(size_t i = gameData->playerParty.getPartySize() - 1; i >= 0; i--) {
         if(!gameData->playerParty[i]->getIsAlive()) { continue; }
         return i;
     }
 }
 
 bool MenuManager::nextPartyMember() {
-    int currentPartyIndex = gameData->partyIndex;
     bool validPartyIndex{};
 
-    for(currentPartyIndex; !validPartyIndex; currentPartyIndex++) {
+    for(size_t currentPartyIndex = gameData->partyIndex; !validPartyIndex; currentPartyIndex++) {
         if(gameData->playerParty.getPartySize() == currentPartyIndex + 1) { break; }
         if(!gameData->playerParty[currentPartyIndex + 1]->getIsAlive()) { continue; }
 
@@ -132,10 +132,9 @@ bool MenuManager::nextPartyMember() {
 }
 
 bool MenuManager::prevPartyMember() {
-    int currentPartyIndex = gameData->partyIndex;
     bool validPartyIndex{};
 
-    for(currentPartyIndex; !validPartyIndex; currentPartyIndex++) {
+    for(size_t currentPartyIndex = gameData->partyIndex; !validPartyIndex; currentPartyIndex++) {
         if(gameData->playerParty.getPartySize() == currentPartyIndex - 1) { break; }
         if(!gameData->playerParty[currentPartyIndex - 1]->getIsAlive()) { continue; }
 

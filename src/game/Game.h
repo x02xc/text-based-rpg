@@ -19,6 +19,7 @@
 class Game {
 private:
     GameData gameData;
+    MenuManager manager;
 public:
     Game();
     ~Game();
@@ -30,6 +31,8 @@ public:
     void clearConsole() const;
 
     void gameLoop();
+
+    bool combatLoop();
 };
 
 #endif

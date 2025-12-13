@@ -1,6 +1,7 @@
 #include "Game.h"
 
-Game::Game() {
+Game::Game()
+    : manager(&gameData) {
 
     gameData.arena.emplace_back(createEnemyParty(1));
     gameData.arena.emplace_back(createEnemyParty(2));
@@ -9,7 +10,6 @@ Game::Game() {
     gameData.arena.emplace_back(Party(std::vector<Character*>{
         new Boss("Boss Man",4)
     }));
-
 
 }
 
@@ -84,7 +84,6 @@ void Game::clearConsole() const {
 }
 
 void Game::gameLoop() {
-    MenuManager manager(&gameData);
     int choice;
 
     bool endGame{};
@@ -95,5 +94,53 @@ void Game::gameLoop() {
         manager.createMainMenu();
         manager.run();
 
+    }
+}
+
+bool Game::combatLoop() {
+    Party* winner;
+    Party* loser;
+
+    gameData.currentBattle.battleStart();
+
+    std::cout << "==== Player Party =====\n";
+    gameData.playerParty.printPartyInfo();
+    std::cout << endl << "==== Enemy Party =====\n";
+    gameData.arena[gameData.arenaIndex].printPartyInfo();
+    std::cout << endl;
+
+    manager.createFightMenu();
+
+    while(gameData.currentBattle.playerParty.getIsAlive() && gameData.currentBattle.enemyParty.getIsAlive()) {
+        gameData.currentBattle.printTurn();
+
+        manager.run();
+
+        gameData.currentBattle.turnCount++;
+    }
+
+    if (gameData.playerParty.getIsAlive()) { 
+        winner = &gameData.currentBattle.playerParty; 
+        loser = &gameData.currentBattle.enemyParty; 
+
+        float expDropped;
+        for (size_t i = 0; i < loser->getPartySize(); i++) {
+            expDropped += (*loser)[i]->getExpDrop();
+        }
+
+        expDropped /= winner->getPartySize();
+
+        for (size_t i = 0; i < winner->getPartySize(); i++) {
+            (*winner)[i]->canLevel(expDropped);
+        }
+
+        gameData.currentBattle.endInfo(winner);
+        return true; 
+    }
+    else { 
+        winner = &gameData.currentBattle.enemyParty; 
+        loser = &gameData.currentBattle.playerParty; 
+        gameData.currentBattle.endInfo(winner);
+        return false; 
     }
 }
