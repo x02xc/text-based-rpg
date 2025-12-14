@@ -13,7 +13,7 @@ void MenuManager::createMainMenu() {
 }
 
 void MenuManager::createFightMenu() {
-    menuStack.emplace("Choose an Option:\n",std::vector<Command>{
+    menuStack.emplace("Fight:\n",std::vector<Command>{
         {"Fight",[this]() { 
             gameData->currentBattle = Combat(gameData->playerParty,gameData->arena[gameData->arenaIndex]);
             gameData->state = GameState::BATTLE;
@@ -26,6 +26,8 @@ void MenuManager::createFightMenu() {
             gameData->arena[gameData->arenaIndex].printPartyInfo();
         }}
     });
+
+    std::cout << "called\n";
 }
 
 void MenuManager::createSelectSkillMenu() {
@@ -152,5 +154,11 @@ bool MenuManager::prevPartyMember() {
 // ------------------------------------->
 
 void MenuManager::run() {
-    while(!menuStack.empty()) menuStack.top().runMenu();
+    if(!menuStack.empty()) menuStack.top().runMenu();
+}
+
+// -----------------  DEBUG FUNCS  -------------------->
+
+void MenuManager::printTopStack() const {
+    std::cout << menuStack.top().menuMessage << endl;
 }

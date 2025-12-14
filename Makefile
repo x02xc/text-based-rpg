@@ -1,6 +1,6 @@
 # ====== CONFIG ======
 CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -Isrc
+CXXFLAGS := -std=c++17 -Wall -Wextra -Isrc -g -O0
 TARGET := text_rpg.exe
 
 # ====== FILES ======

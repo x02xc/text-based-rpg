@@ -87,12 +87,16 @@ void Game::gameLoop() {
     int choice;
 
     bool endGame{};
+    createPlayerParty();
+    manager.createMainMenu();
+
     while (!endGame) {
 
-        createPlayerParty();
-
-        manager.createMainMenu();
         manager.run();
+
+        std::cout << "Hello World\n";
+
+        manager.printTopStack();
 
     }
 }

@@ -31,4 +31,6 @@ public:
     void createSelectTargetMenu();
 
     void run();
+
+    void printTopStack() const;
 };
