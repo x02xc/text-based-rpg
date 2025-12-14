@@ -107,13 +107,17 @@ size_t MenuManager::getFirstPartyIndex() {
         if(!gameData->playerParty[i]->getIsAlive()) { continue; }
         return i;
     }
+
+    return -1;
 }
 
 size_t MenuManager::getLastPartyIndex() {
-    for(size_t i = gameData->playerParty.getPartySize() - 1; i >= 0; i--) {
+    for(size_t i = gameData->playerParty.getPartySize() - 1; i > 0; i--) {
         if(!gameData->playerParty[i]->getIsAlive()) { continue; }
         return i;
     }
+
+    return -1;
 }
 
 bool MenuManager::nextPartyMember() {

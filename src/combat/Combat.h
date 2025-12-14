@@ -29,8 +29,6 @@ struct Combat {
     Character* getEnemyTarget();
     Skill* getEnemySkill(Character* source);
 
-    void fightMenu();
-
     void performAction(Character* source,Character* target,Skill* skill);
 
     void processTurn();

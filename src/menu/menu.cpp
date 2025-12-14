@@ -1,7 +1,8 @@
 #include "Menu.h"
 #include <iostream>
+#include <limits>
 
-Menu::Menu(std::string&& msg,std::vector<Command>& opts)
+Menu::Menu(std::string&& msg,const std::vector<Command>& opts)
     : menuMessage(msg), options(opts) {}
 
 void Menu::runMenu() {
@@ -19,16 +20,17 @@ void Menu::runMenu() {
 
         bool validOption{};
         while(!validOption) {
-            std::cin >> choice;
+            
         
-            if(std::cin.fail()) {
+            if(!(std::cin >> choice)) {
                 std::cout << "Invalid Option.\n";
                 std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 continue;
             }
 
-            if(choice <= 0 || choice < options.size()) {
-                std::cout << "Invalid Option.\n";
+            if(choice < 1 || choice > options.size()) {
+                std::cout << "Out of Range.\n";
             }
             else { validOption = true; }
         }

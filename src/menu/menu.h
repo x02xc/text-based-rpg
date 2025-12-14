@@ -13,6 +13,6 @@ public:
     std::string menuMessage;
     std::vector<Command> options;
 
-    Menu(std::string&& msg,std::vector<Command>& opts);
+    Menu(std::string&& msg,const std::vector<Command>& opts);
     void runMenu();
 };

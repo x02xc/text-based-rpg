@@ -7,7 +7,7 @@ TARGET := text_rpg.exe
 # Explicitly list each .cpp file (guaranteed to work)
 SRCS := \
     src/main.cpp \
-    src/Game.cpp \
+    src/game/Game.cpp \
     src/character/Character.cpp \
     src/combat/Combat.cpp \
     src/combat/Action.cpp \
