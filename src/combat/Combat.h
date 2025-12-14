@@ -16,6 +16,8 @@ struct Combat {
     Character* source;
     Character* target;
     Skill* skill;
+    Party* winner;
+    Party* loser;
 
     Combat() = default;
     Combat(Party player, Party enemy);
@@ -32,6 +34,8 @@ struct Combat {
     void performAction(Character* source,Character* target,Skill* skill);
 
     void processTurn();
+
+    bool endBattle();
 };
 
 #endif

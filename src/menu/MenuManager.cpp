@@ -6,18 +6,23 @@ MenuManager::MenuManager(GameData *gm)
 
 void MenuManager::createMainMenu() {
     menuStack.emplace("Choose an Option:\n",std::vector<Command>{
-        {"Fight",[this]() { createFightMenu(); }}, // TODO - fix
+        {"Fight",[this]() { 
+            gameData->currentBattle = Combat(gameData->playerParty,gameData->arena[gameData->arenaIndex]);
+            gameData->state = GameState::BATTLE;
+            
+            createFightMenu();
+        }},
         {"Print Party Stats",[this]() { gameData->playerParty.printPartyInfo(); }},
         {"Quit",[this]() { exit(0); }}
     });
 }
 
 void MenuManager::createFightMenu() {
-    menuStack.emplace("Fight:\n",std::vector<Command>{
+    menuStack.emplace(
+        "Choose an Option:\n",
+        std::vector<Command>{
         {"Fight",[this]() { 
-            gameData->currentBattle = Combat(gameData->playerParty,gameData->arena[gameData->arenaIndex]);
-            gameData->state = GameState::BATTLE;
-            while(!menuStack.empty()) { menuStack.pop(); }
+            createSelectSkillMenu();
         }},
         {"Print Battle Info",[this]() { 
             cout << "===== Player Party =====\n";
@@ -26,8 +31,6 @@ void MenuManager::createFightMenu() {
             gameData->arena[gameData->arenaIndex].printPartyInfo();
         }}
     });
-
-    std::cout << "called\n";
 }
 
 void MenuManager::createSelectSkillMenu() {
@@ -58,9 +61,12 @@ void MenuManager::createSelectSkillMenu() {
             }
         });
     }
-    
+
     // creating and adding menu to menuStack
-    menuStack.emplace("Choose a Move: ",skillMenuOptions);
+    menuStack.emplace(
+        gameData->currentBattle.playerParty[gameData->partyIndex]->getName() + "\n" + "Choose a Move: \n",
+        skillMenuOptions
+    );
 }
 
 void MenuManager::createSelectTargetMenu() {
@@ -83,9 +89,17 @@ void MenuManager::createSelectTargetMenu() {
                 ));
 
                 // if false, there's no more party members, so invoke processTurn()
-                if(!nextPartyMember()) { gameData->currentBattle.processTurn(); }
-
-                menuStack.pop();
+                if(!nextPartyMember()) { 
+                    gameData->currentBattle.processTurn();
+                    // if battle is over then end battle
+                    if(!(gameData->currentBattle.playerParty.getIsAlive()) || !(gameData->currentBattle.enemyParty.getIsAlive())) {
+                        gameData->endGame = gameData->currentBattle.endBattle();
+                        gameData->partyIndex++;
+                        menuStack.pop();
+                        menuStack.pop();
+                    }
+                }
+                else { menuStack.pop(); }
             }
         });
     }
@@ -98,9 +112,6 @@ void MenuManager::createSelectTargetMenu() {
 
     menuStack.emplace("Choose a Target: ",targetMenuOptions);
 }
-
-// TODO - Add checks for party index - no dead members allowed to pick skill
-// TODO - Finish createSelectTargetMenu()
 
 // ------------------------------------->
 

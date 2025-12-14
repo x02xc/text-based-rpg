@@ -130,5 +130,32 @@ void Combat::processTurn() {
         );
         actionQueue.pop();
     }
+}
 
+bool Combat::endBattle() {
+
+    if (playerParty.getIsAlive()) { 
+        winner = &playerParty; 
+        loser = &enemyParty; 
+
+        float expDropped;
+        for (size_t i = 0; i < loser->getPartySize(); i++) {
+            expDropped += (*loser)[i]->getExpDrop();
+        }
+
+        expDropped /= winner->getPartySize();
+
+        for (size_t i = 0; i < winner->getPartySize(); i++) {
+            (*winner)[i]->canLevel(expDropped);
+        }
+
+        endInfo(winner);
+        return true;
+    }
+    else { 
+        winner = &enemyParty; 
+        loser = &playerParty; 
+        endInfo(winner);
+        return false;
+    }
 }

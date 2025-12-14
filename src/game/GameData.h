@@ -18,4 +18,5 @@ struct GameData {
     size_t partyIndex = 0;
     Combat currentBattle{};
     GameState state = GameState::MAIN_MENU;
+    bool endGame{};
 };

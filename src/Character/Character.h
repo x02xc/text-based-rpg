@@ -39,7 +39,7 @@ public:
     virtual ~Character() = default;
 
     // getters
-    const string& getName() const;
+    std::string getName() const;
     int getLevel() const;
     float getExp() const;
     float getNextLevel() const;

@@ -84,27 +84,17 @@ void Game::clearConsole() const {
 }
 
 void Game::gameLoop() {
-    int choice;
-
-    bool endGame{};
     createPlayerParty();
     manager.createMainMenu();
 
-    while (!endGame) {
+    while (!gameData.endGame) {
 
         manager.run();
-
-        std::cout << "Hello World\n";
-
-        manager.printTopStack();
 
     }
 }
 
 bool Game::combatLoop() {
-    Party* winner;
-    Party* loser;
-
     gameData.currentBattle.battleStart();
 
     std::cout << "==== Player Party =====\n";
@@ -121,30 +111,5 @@ bool Game::combatLoop() {
         manager.run();
 
         gameData.currentBattle.turnCount++;
-    }
-
-    if (gameData.playerParty.getIsAlive()) { 
-        winner = &gameData.currentBattle.playerParty; 
-        loser = &gameData.currentBattle.enemyParty; 
-
-        float expDropped;
-        for (size_t i = 0; i < loser->getPartySize(); i++) {
-            expDropped += (*loser)[i]->getExpDrop();
-        }
-
-        expDropped /= winner->getPartySize();
-
-        for (size_t i = 0; i < winner->getPartySize(); i++) {
-            (*winner)[i]->canLevel(expDropped);
-        }
-
-        gameData.currentBattle.endInfo(winner);
-        return true; 
-    }
-    else { 
-        winner = &gameData.currentBattle.enemyParty; 
-        loser = &gameData.currentBattle.playerParty; 
-        gameData.currentBattle.endInfo(winner);
-        return false; 
     }
 }

@@ -7,12 +7,14 @@ Menu::Menu(std::string&& msg,const std::vector<Command>& opts)
 
 void Menu::runMenu() {
     // print menu message
-    std::cout << menuMessage << std::endl << ">";
+    std::cout << menuMessage << std::endl;
 
     // print options
     for (size_t i=0;i < options.size(); i++) {
-        std::cout << i + 1 << ") " << options[i].name;
+        std::cout << i + 1 << ") " << options[i].name << std::endl;
     }
+
+    std::cout << ">";
 
     // cin option
     size_t choice = 0;

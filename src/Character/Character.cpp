@@ -12,7 +12,7 @@ Character::Character(string n, int l)
 }
 
 // getters
-const string& Character::getName() const { return name; }
+std::string Character::getName() const { return name; }
 int Character::getLevel() const { return stats.level; }
 float Character::getExp() const { return exp; }
 float Character::getNextLevel() const { return nextLevel; }
