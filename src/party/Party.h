@@ -6,13 +6,13 @@
 
 class Party {
 private:
-    vector<Character*> party;
+    std::vector<Character*> party;
 public:
     Party() = default;
 
-    Party(vector<Character*> members);
+    Party(std::vector<Character*> members);
 
-    vector<Character*> getParty() const;
+    std::vector<Character*> getParty() const;
     
     Character* operator[](int index) const;
 

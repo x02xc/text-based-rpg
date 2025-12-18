@@ -1,13 +1,17 @@
 #include "Menu.h"
 #include <iostream>
 #include <limits>
+#include "../Terminal.h"
 
 Menu::Menu(std::string&& msg,const std::vector<Command>& opts)
     : menuMessage(msg), options(opts) {}
 
 void Menu::runMenu() {
+
+    terminal::setup();
+
     // print menu message
-    std::cout << menuMessage << std::endl;
+    std::cout << terminal::background(terminal::blue) << menuMessage << std::endl << terminal::reset;
 
     // print options
     for (size_t i=0;i < options.size(); i++) {

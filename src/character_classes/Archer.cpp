@@ -1,6 +1,6 @@
 #include "Archer.h"
 
-Archer::Archer(const string& n,int level)
+Archer::Archer(const std::string& n,int level)
     : Character(n, level) {
         stats.hp = archerHp(level);
         stats.maxHp = archerHp(level);

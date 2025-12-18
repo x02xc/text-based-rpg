@@ -1,6 +1,6 @@
 #include "Warrior.h"
 
-Warrior::Warrior(const string& n,int level)
+Warrior::Warrior(const std::string& n,int level)
     : Character(n, level) {
         stats.hp = warriorHp(level);
         stats.maxHp = warriorHp(level);

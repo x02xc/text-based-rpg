@@ -4,7 +4,7 @@
 #include "../skills/DamageHp.h"
 
 // constructor
-Character::Character(string n, int l) 
+Character::Character(std::string n, int l) 
     : name(n), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isAlive(true), isDefending(false) { 
     stats.level = l;
     skills.emplace_back(&BasicAttack);
@@ -32,7 +32,7 @@ float Character::getMaxResistance() const { return stats.maxResistance; }
 bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
 bool Character::getIsMagic() const { return isMagic; }
-const vector<Skill*>& Character::getSkills() { return skills; }
+const std::vector<Skill*>& Character::getSkills() { return skills; }
 size_t Character::getSkillListSize() const { return skills.size(); }
 
 // setters
@@ -94,11 +94,11 @@ void Character::printInfo() const {
     std::cout << "MAG: " << stats.magic << " | ";
     std::cout << "RES: " << stats.resistance << " | ";
     std::cout << "STATUS: " << (isAlive ? "Alive" : "Dead");
-    std::cout << endl;
+    std::cout << std::endl;
 }
 
 void Character::printSkills() const {
     for (size_t i = 0; i < skills.size(); i++) {
-        std::cout << i + 1 << ") " << skills[i]->getName() << endl;
+        std::cout << i + 1 << ") " << skills[i]->getName() << std::endl;
     }
 }

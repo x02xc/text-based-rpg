@@ -68,61 +68,22 @@ namespace terminal {
     
     // ensures windows will support ANSI escape codes, on mac and linux
     // they should just work out of the box but that needs to be validated
-    void setup() {
-#if defined(_WIN32)
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-        CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
-        GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
-    
-        DWORD dwMode = 0;
-        GetConsoleMode(hConsole, &dwMode);
-        dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
-        SetConsoleMode(hConsole, dwMode);
-#elif defined(__OSX__)
-        // TODO: handle any Mac / OSX specific setup if needed
-#elif defined(__linux__)
-        // TODO: handle any Linux specific setup if needed
-#endif
-    }
+    void setup();
 
     // clear any text effect (underline, foreground, background, inversion)
-    std::ostream& reset(std::ostream& os) {
-        os << ESCAPE << "0m";
-        return os;
-    }
+    std::ostream& reset(std::ostream& os);
 
-    std::ostream& underline(std::ostream& os) {
-        os << ESCAPE << "4m";
-        return os;
-    }
+    std::ostream& underline(std::ostream& os);
 
-    std::ostream& negative(std::ostream& os) {
-        os << ESCAPE << "7m";
-        return os;
-    }
+    std::ostream& negative(std::ostream& os);
 
-    std::ostream& invert(std::ostream& os) {
-        return negative(os);
-    }
+    std::ostream& invert(std::ostream& os);
 
-    std::string foreground(Color color) {
-        std::ostringstream code;
-        code << ESCAPE << "38;2;" << (int)color.r << ';' << (int)color.g << ';' << (int)color.b << 'm';
-        return code.str();
-    }
+    std::string foreground(Color color);
 
-    std::string background(Color color) {
-        std::ostringstream code;
-        code << ESCAPE << "48;2;" << (int)color.r << ';' << (int)color.g << ';' << (int)color.b << 'm';
-        return code.str();
-    }
+    std::string background(Color color);
 
-    std::string both(Color foreground, Color background) {
-        std::ostringstream code;
-        code << ESCAPE << "38;2;" << (int)foreground.r << ';' << (int)foreground.g << ';' << (int)foreground.b << 'm';
-        code << ESCAPE << "48;2;" << (int)background.r << ';' << (int)background.g << ';' << (int)background.b << 'm';
-        return code.str();
-    }
+    std::string both(Color foreground, Color background);
 }
 
 #endif // TERMINAL_H

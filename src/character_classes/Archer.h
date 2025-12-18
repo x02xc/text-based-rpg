@@ -5,7 +5,7 @@
 
 class Archer : public Character {
 public:
-    Archer (const string& n,int lvl);
+    Archer (const std::string& n,int lvl);
 
     void setHpStat() override;
     void setResourceStat() override;

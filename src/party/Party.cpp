@@ -1,9 +1,9 @@
 #include "Party.h"
 
-Party::Party(vector<Character*> members)
+Party::Party(std::vector<Character*> members)
     : party(members) {}
 
-vector<Character*> Party::getParty() const { return party; }
+std::vector<Character*> Party::getParty() const { return party; }
 
 Character* Party::operator[](int index) const {
     return party[index];

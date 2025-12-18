@@ -5,7 +5,7 @@
 
 class Warrior : public Character {
 public:
-    Warrior(const string& n,int lvl);
+    Warrior(const std::string& n,int lvl);
 
     void setHpStat() override;
     void setResourceStat() override;

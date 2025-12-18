@@ -20,5 +20,5 @@ float Skill::getCost() const { return cost; }
 TargetType Skill::getTargetType() const { return targetType; }
 
 void Skill::cantUse(Character* source) const {
-    cout << (source->getIsMagic()) ? "Not Enough Mana!\n" : "Not Enough Stamina!\n";
+    std::cout << (source->getIsMagic()) ? "Not Enough Mana!\n" : "Not Enough Stamina!\n";
 }

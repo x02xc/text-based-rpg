@@ -5,7 +5,7 @@
 
 class Mage : public Character {
 public:
-    Mage (const string& n,int lvl);
+    Mage (const std::string& n,int lvl);
 
     void setHpStat() override;
     void setResourceStat() override;

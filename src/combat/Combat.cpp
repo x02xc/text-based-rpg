@@ -20,28 +20,28 @@ void Combat::printTurn() const {
 }
 
 void Combat::endInfo(Party *winners) const {
-    // std::cout << losers->getName() << " HAS FALLEN!" << endl;
-    std::cout << "====================================" << endl;
-    std::cout << "BATTLE HAS ENDED!" << endl;
+    // std::cout << losers->getName() << " HAS FALLEN!" << std::endl;
+    std::cout << "====================================" << std::endl;
+    std::cout << "BATTLE HAS ENDED!" << std::endl;
     std::cout << "WINNERS: ";
     for (size_t i = 0; i < winners->getPartySize(); i++) { std::cout << (*winners)[i]->getName() << " | "; } 
-    std::cout << endl;
-    std::cout << "====================================" << endl << endl;
+    std::cout << std::endl;
+    std::cout << "====================================" << std::endl << std::endl;
 
     // TODO - Print XP, LVL, etc. 
 
 }
 
 void Combat::battleStart() const {
-    std::cout << "====================================" << endl;
-    std::cout << "BATTLE HAS BEGUN!" << endl;
+    std::cout << "====================================" << std::endl;
+    std::cout << "BATTLE HAS BEGUN!" << std::endl;
     // Print Player Party
     for (size_t i = 0; i < playerParty.getPartySize(); i++) { std::cout << playerParty[i]->getName() << " "; } 
-    std::cout << endl;
+    std::cout << std::endl;
     std::cout << "VS\n";
     // Print Enemy Party
     for (size_t i = 0; i < enemyParty.getPartySize(); i++) { std::cout << enemyParty[i]->getName() << " "; } 
-    std::cout << endl << "====================================" << endl << endl;
+    std::cout << std::endl << "====================================" << std::endl << std::endl;
 }
 
 void Combat::getValidTargets(const Party& sourceParty, const Party& opposingParty, Character* actingCharacter, Skill* actingSkill) {
@@ -82,7 +82,7 @@ Character* Combat::getEnemyTarget(Character* actingSource, Skill* actingSkill) {
 
 // enemy turn
 Skill* Combat::getEnemySkill(Character* source) {
-    const vector<Skill*>& skillList = source->getSkills();
+    const std::vector<Skill*>& skillList = source->getSkills();
     Skill* pickedSkill;
 
     // TODO - Make better (more sophisticated)

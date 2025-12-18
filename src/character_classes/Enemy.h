@@ -5,7 +5,7 @@
 
 class Enemy : public Character {
 public:
-    Enemy(const string& n,int lvl);
+    Enemy(const std::string& n,int lvl);
 
     void setHpStat() override;
     void setResourceStat() override;

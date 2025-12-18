@@ -12,5 +12,5 @@ void DamageHp::useSkill(Character* source, Character* target) {
 
     target->setHp(target->getHp() - dmgPoints);
     if (target->getHp() < 0) { target->setHp(0); }
-    cout << target->getName() << " lost " << dmgPoints << " HP!\n";
+    std::cout << target->getName() << " lost " << dmgPoints << " HP!\n";
 }

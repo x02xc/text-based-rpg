@@ -31,9 +31,9 @@ void MenuManager::createFightMenu() {
         }},
         {"Print Battle Info",[this]() { 
             clearConsole();
-            cout << "===== Player Party =====";
+            std::cout << "===== Player Party =====";
             gameData->playerParty.printPartyInfo();
-            cout << endl << "===== Enemy Party =====";
+            std::cout << std::endl << "===== Enemy Party =====";
             gameData->arena[gameData->arenaIndex].printPartyInfo();
         }}
     });
@@ -227,9 +227,9 @@ void MenuManager::run() {
 // -----------------  DEBUG FUNCS  -------------------->
 
 void MenuManager::printTopStack() const {
-    std::cout << menuStack.top().menuMessage << endl;
+    std::cout << menuStack.top().menuMessage << std::endl;
 }
 
 void MenuManager::clearConsole() const {
-    cout << "\033[2J";
+    std::cout << "\033[2J";
 }

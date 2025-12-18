@@ -13,7 +13,7 @@ enum class GameState{
 struct GameData {
     Party playerParty{};
     Party bossParty{};
-    vector<Party> arena{};
+    std::vector<Party> arena{};
     size_t arenaIndex = 0;
     size_t partyIndex = 0;
     Combat currentBattle{};

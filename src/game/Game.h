@@ -24,7 +24,7 @@ public:
     Game();
     ~Game();
 
-    vector<Character*> createEnemyParty(int level);
+    std::vector<Character*> createEnemyParty(int level);
     
     void createPlayerParty();
 

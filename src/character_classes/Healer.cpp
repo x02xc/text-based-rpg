@@ -1,6 +1,6 @@
 #include "Healer.h"
 
-Healer::Healer(const string& n,int level)
+Healer::Healer(const std::string& n,int level)
     : Character(n, level) {
         stats.hp = healerHp(level);
         stats.maxHp = healerHp(level);

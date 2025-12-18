@@ -10,5 +10,5 @@ void BuffDef::useSkill(Character* source, Character* target) {
     statPoints = target->getDef() + points * (source->getLevel() * 0.5);
 
     target->setDefense(statPoints);
-    cout << target->getName() << "'s defense was raised by " << statPoints << "!\n";
+    std::cout << target->getName() << "'s defense was raised by " << statPoints << "!\n";
 }

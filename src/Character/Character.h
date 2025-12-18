@@ -9,8 +9,6 @@
 #include "../skills/SkillList.h"
 #include "Stat.h"
 
-using namespace std;
-
 enum class ClassType{
     Warrior,
     Mage,
@@ -22,7 +20,7 @@ enum class ClassType{
 
 class Character {
 protected:
-    string name;
+    std::string name;
     Stats stats;
     float exp; // TODO - progression struct (similar to stats) (would need refactoring for leveling system)
     float nextLevel;
@@ -30,11 +28,11 @@ protected:
     bool isAlive;
     bool isDefending;
     bool isMagic;
-    vector<Skill*> skills;
+    std::vector<Skill*> skills;
     ClassType characterClass;
 public:
     // Constructor / Destructor
-    Character(string n,int l);
+    Character(std::string n,int l);
 
     virtual ~Character() = default;
 
@@ -59,7 +57,7 @@ public:
     bool getIsAlive() const;
     bool getIsDefending() const;
     bool getIsMagic() const;
-    const vector<Skill*>& getSkills();
+    const std::vector<Skill*>& getSkills();
     size_t getSkillListSize() const;
 
     // setters

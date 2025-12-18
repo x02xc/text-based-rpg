@@ -1,6 +1,6 @@
 #include "Boss.h"
 
-Boss::Boss(const string& n,int level)
+Boss::Boss(const std::string& n,int level)
     : Character(n, level) {
         stats.hp = bossHp(level);
         stats.maxHp = bossHp(level);
