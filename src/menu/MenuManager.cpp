@@ -12,10 +12,11 @@ void MenuManager::createMainMenu() {
 
             gameData->currentBattle.battleStart();
             
+            clearConsole();
             gameData->currentBattle.printTurn();
             createFightMenu();
         }},
-        {"Print Party Stats",[this]() { gameData->playerParty.printPartyInfo(); }},
+        {"Print Party Stats",[this]() { clearConsole(); gameData->playerParty.printPartyInfo(); }},
         {"Quit",[this]() { exit(0); }}
     });
 }
@@ -25,9 +26,11 @@ void MenuManager::createFightMenu() {
         "Choose an Option:",
         std::vector<Command>{
         {"Fight",[this]() { 
+            clearConsole();
             createSelectSkillMenu();
         }},
         {"Print Battle Info",[this]() { 
+            clearConsole();
             cout << "===== Player Party =====";
             gameData->playerParty.printPartyInfo();
             cout << endl << "===== Enemy Party =====";
@@ -49,6 +52,7 @@ void MenuManager::createSelectSkillMenu() {
                 auto pickedSkill = gameData->playerParty[gameData->partyIndex]->getSkills()[i];
                 if(pickedSkill != nullptr) { gameData->currentBattle.skill = pickedSkill; }
                 gameData->currentBattle.source = gameData->playerParty[gameData->partyIndex];
+                clearConsole();
                 createSelectTargetMenu();
             }
         });
@@ -60,6 +64,7 @@ void MenuManager::createSelectSkillMenu() {
             "[BACK]",
             [this]() {
                 prevPartyMember();
+                clearConsole();
                 createSelectSkillMenu();
                 gameData->currentBattle.actionDeque.pop_back();
             }
@@ -72,6 +77,7 @@ void MenuManager::createSelectSkillMenu() {
                 gameData->partyIndex = getFirstPartyIndex();
                 menuStack.pop();
                 menuStack.pop();
+                clearConsole();
                 gameData->currentBattle.printTurn();
                 createFightMenu();
         }
@@ -111,6 +117,7 @@ void MenuManager::createSelectTargetMenu() {
 
                 // if false, there's no more party members, so invoke processTurn()
                 if(!nextPartyMember()) { 
+                    clearConsole();
                     gameData->currentBattle.processTurn();
                     // if battle is over then end battle
                     if(!(gameData->currentBattle.playerParty.getIsAlive()) || !(gameData->currentBattle.enemyParty.getIsAlive())) {
@@ -120,6 +127,7 @@ void MenuManager::createSelectTargetMenu() {
                         menuStack.pop();
                         menuStack.pop();
                         menuStack.pop();
+                        clearConsole();
                         return;
                     }
                     
@@ -133,6 +141,7 @@ void MenuManager::createSelectTargetMenu() {
                 else {
                     menuStack.pop();
                     menuStack.pop();
+                    clearConsole();
                     createSelectSkillMenu();
                 }
             }
@@ -142,7 +151,7 @@ void MenuManager::createSelectTargetMenu() {
     // back command
     targetMenuOptions.emplace_back(Command{
         "[BACK]",
-        [this]() { menuStack.pop(); }
+        [this]() { clearConsole(); menuStack.pop(); }
     });
 
     targetMenuOptions.emplace_back(Command{
@@ -151,6 +160,7 @@ void MenuManager::createSelectTargetMenu() {
                 gameData->partyIndex = getFirstPartyIndex();
                 menuStack.pop();
                 menuStack.pop();
+                clearConsole();
                 gameData->currentBattle.printTurn();
                 createFightMenu();
         }
