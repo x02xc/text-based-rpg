@@ -6,7 +6,7 @@
 int main() {
     srand(time(0));
 
-    // terminal::setup();
+    terminal::setup();
 
     Game game;
     

@@ -9,33 +9,37 @@ Menu::Menu(std::string&& msg,const std::vector<Command>& opts)
 void Menu::runMenu() {
 
     terminal::setup();
-
-    // print menu message
-    std::cout << terminal::background(terminal::blue) << menuMessage << std::endl << terminal::reset;
-
-    // print options
-    for (size_t i=0;i < options.size(); i++) {
-        std::cout << i + 1 << ") " << options[i].name << std::endl;
-    }
-
-    std::cout << ">";
+    
 
     // cin option
     size_t choice = 0;
 
     bool validOption{};
     while(!validOption) {
+
+        std::cout << menuMessage << std::endl;
+
+        // print options
+        for (size_t i=0;i < options.size(); i++) {
+            std::cout << i + 1 << ") " << options[i].name << std::endl;
+        }
+
+        std::cout << ">";
             
         
         if(!(std::cin >> choice)) {
-            std::cout << "Invalid Option.\n";
+            terminal::clearConsole();
+            std::cout << terminal::foreground(terminal::red) << "Invalid Option.\n" << terminal::reset;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << ">";
             continue;
         }
 
         if(choice < 1 || choice > options.size()) {
-            std::cout << "Out of Range.\n";
+            terminal::clearConsole();
+            std::cout << terminal::foreground(terminal::red) << "Out of Range.\n" << terminal::reset;
+            std::cout << ">";
         }
         else { validOption = true; }
     }

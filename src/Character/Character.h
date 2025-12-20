@@ -8,6 +8,7 @@
 #include "../skills/Skill.h"
 #include "../skills/SkillList.h"
 #include "Stat.h"
+#include "../Terminal.h"
 
 enum class ClassType{
     Warrior,
@@ -59,6 +60,8 @@ public:
     bool getIsMagic() const;
     const std::vector<Skill*>& getSkills();
     size_t getSkillListSize() const;
+    terminal::Color getClassColor() const;
+    terminal::Color getHealthColor() const;
 
     // setters
     void setHp(float h);

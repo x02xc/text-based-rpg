@@ -15,6 +15,7 @@
 #include "../menu/Menu.h"
 #include "../menu/MenuManager.h"
 #include "GameData.h"
+#include "../Terminal.h"
 
 class Game {
 private:

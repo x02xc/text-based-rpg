@@ -59,15 +59,16 @@ void Game::createPlayerParty() {
         bool endLoop{};
         while(!endLoop) {
             std::cout << "Choose Class for " << name << ": " << std::endl;
-            std::cout << "1) Warrior\n";
-            std::cout << "2) Mage\n";
-            std::cout << "3) Archer\n";
-            std::cout << "4) Healer\n>";
+            std::cout << "1) " << terminal::foreground(terminal::brightRed) << "Warrior\n" << terminal::reset;
+            std::cout << "2) " << terminal::foreground(terminal::brightBlue) << "Mage\n" << terminal::reset;
+            std::cout << "3) " << terminal::foreground(terminal::brightGreen) << "Archer\n" << terminal::reset;
+            std::cout << "4) " << terminal::foreground(terminal::brightMagenta) << "Healer\n" << terminal::reset;
+            std::cout << terminal::reset << ">";
             std::cin >> choice;
 
             clearConsole();
 
-            if (choice < 1 || choice > 4) { std::cout << "Invalid Option.\n"; }
+            if (choice < 1 || choice > 4) { std::cout << terminal::foreground(terminal::red) << "Invalid Option.\n" << terminal::reset; }
             else { endLoop = true; }
         }
 
@@ -82,7 +83,7 @@ void Game::createPlayerParty() {
 
 void Game::gameLoop() {
     createPlayerParty();
-
+    terminal::background(terminal::white);
     manager.createMainMenu();
 
     while (!gameData.endGame) {

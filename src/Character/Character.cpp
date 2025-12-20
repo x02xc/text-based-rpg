@@ -34,6 +34,31 @@ bool Character::getIsDefending() const { return isDefending; }
 bool Character::getIsMagic() const { return isMagic; }
 const std::vector<Skill*>& Character::getSkills() { return skills; }
 size_t Character::getSkillListSize() const { return skills.size(); }
+terminal::Color Character::getClassColor() const {
+    switch(this->characterClass) {
+        case ClassType::Warrior:
+            return terminal::brightRed;
+            break;
+        case ClassType::Mage:
+            return terminal::brightBlue;
+            break;
+        case ClassType::Archer:
+            return terminal::brightGreen;
+            break;
+        case ClassType::Healer:
+            return terminal::brightMagenta;
+            break;
+        case ClassType::Enemy:
+        case ClassType::Boss:
+            return terminal::white;
+            break;
+    }
+}
+terminal::Color Character::getHealthColor() const {
+    if(stats.hp >= (0.7*stats.maxHp)) { return terminal::brightGreen; }
+    else if(stats.hp >= (0.3*stats.maxHp)) { return terminal::brightYellow; }
+    else { return terminal::brightRed; }
+}
 
 // setters
 void Character::setHp(float h) { stats.hp = h; }
@@ -84,9 +109,10 @@ void Character::canLevel(float xp) {
 
 // print info
 void Character::printInfo() const {
-    std::cout << "===== " << name << " ( ";
+
+    std::cout << terminal::foreground(getClassColor()) << "===== " << name << " ( ";
     printClass();
-    std::cout << " ) =====\n";
+    std::cout << " ) =====\n" << terminal::reset;
     std::cout << "LEVEL: " << stats.level << " (" << exp << "exp / " << nextLevel << "exp)" << " | ";
     std::cout << "HP: " << stats.hp << " / " << stats.maxHp << " | ";
     std::cout << "ATK: " << stats.attack << " | ";
@@ -94,7 +120,7 @@ void Character::printInfo() const {
     std::cout << "MAG: " << stats.magic << " | ";
     std::cout << "RES: " << stats.resistance << " | ";
     std::cout << "STATUS: " << (isAlive ? "Alive" : "Dead");
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 }
 
 void Character::printSkills() const {

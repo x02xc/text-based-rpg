@@ -54,3 +54,7 @@ std::string terminal::both(Color foreground, Color background) {
     code << ESCAPE << "48;2;" << (int)background.r << ';' << (int)background.g << ';' << (int)background.b << 'm';
     return code.str();
 }
+
+void terminal::clearConsole() {
+    std::cout << "\033[2J";
+}

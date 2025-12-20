@@ -55,7 +55,7 @@ namespace terminal {
     static Color cyan = Color(0x00AAAA);
     static Color white = Color(0xAAAAAA);
     
-    static Color brightBlack = Color(0x555555);
+    static Color grey = Color(0x555555);
     static Color brightRed = Color(0xFF5555);
     static Color brightGreen = Color(0x55FF55);
     static Color brightYellow = Color(0xFFFF55);
@@ -84,6 +84,8 @@ namespace terminal {
     std::string background(Color color);
 
     std::string both(Color foreground, Color background);
+
+    void clearConsole();
 }
 
 #endif // TERMINAL_H
