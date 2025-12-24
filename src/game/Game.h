@@ -15,6 +15,7 @@
 #include "../menu/Menu.h"
 #include "../menu/MenuManager.h"
 #include "GameData.h"
+#include "../Terminal.h"
 
 class Game {
 private:
@@ -24,7 +25,7 @@ public:
     Game();
     ~Game();
 
-    vector<Character*> createEnemyParty(int level);
+    std::vector<Character*> createEnemyParty(int level);
     
     void createPlayerParty();
 

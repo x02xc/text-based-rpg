@@ -30,9 +30,9 @@ Game::~Game() {
 }
 
 // TODO - Make More Sophisticated
-vector<Character*> Game::createEnemyParty(int level) {
+std::vector<Character*> Game::createEnemyParty(int level) {
 
-    vector<Character*> party;
+    std::vector<Character*> party;
 
     party.emplace_back(new Enemy("Enemy 1",level));
     party.emplace_back(new Enemy("Enemy 2",level));
@@ -49,25 +49,26 @@ void Game::createPlayerParty() {
     for (int i = 0; i < 4; i++) {
 
         // prompt for member name
-        string name;
-        cout << "Party Member " << i + 1 << ": " << endl;
-        cout << "Name: ";
-        cin >> name;
+        std::string name;
+        std::cout << "Party Member " << i + 1 << ": " << std::endl;
+        std::cout << "Name: ";
+        std::cin >> name;
         clearConsole();
 
         // prompt for member class
         bool endLoop{};
         while(!endLoop) {
-            cout << "Choose Class for " << name << ": " << endl;
-            cout << "1) Warrior\n";
-            cout << "2) Mage\n";
-            cout << "3) Archer\n";
-            cout << "4) Healer\n>";
-            cin >> choice;
+            std::cout << "Choose Class for " << name << ": " << std::endl;
+            std::cout << "1) " << terminal::foreground(terminal::brightRed) << "Warrior\n" << terminal::reset;
+            std::cout << "2) " << terminal::foreground(terminal::brightBlue) << "Mage\n" << terminal::reset;
+            std::cout << "3) " << terminal::foreground(terminal::brightGreen) << "Archer\n" << terminal::reset;
+            std::cout << "4) " << terminal::foreground(terminal::brightMagenta) << "Healer\n" << terminal::reset;
+            std::cout << terminal::reset << ">";
+            std::cin >> choice;
 
             clearConsole();
 
-            if (choice < 1 || choice > 4) { cout << "Invalid Option.\n"; }
+            if (choice < 1 || choice > 4) { std::cout << terminal::foreground(terminal::red) << "Invalid Option.\n" << terminal::reset; }
             else { endLoop = true; }
         }
 
@@ -82,6 +83,7 @@ void Game::createPlayerParty() {
 
 void Game::gameLoop() {
     createPlayerParty();
+    terminal::background(terminal::white);
     manager.createMainMenu();
 
     while (!gameData.endGame) {
@@ -96,9 +98,9 @@ bool Game::combatLoop() {
 
     std::cout << "==== Player Party =====\n";
     gameData.playerParty.printPartyInfo();
-    std::cout << endl << "==== Enemy Party =====\n";
+    std::cout << std::endl << "==== Enemy Party =====\n";
     gameData.arena[gameData.arenaIndex].printPartyInfo();
-    std::cout << endl;
+    std::cout << std::endl;
 
     manager.createFightMenu();
 
@@ -112,5 +114,5 @@ bool Game::combatLoop() {
 }
 
 void Game::clearConsole() const {
-    cout << "\033[2J";
+    std::cout << "\033[2J";
 }

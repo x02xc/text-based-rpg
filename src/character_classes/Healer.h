@@ -5,7 +5,7 @@
 
 class Healer : public Character {
 public:
-    Healer (const string& n,int lvl);
+    Healer (const std::string& n,int lvl);
 
     void setHpStat() override;
     void setResourceStat() override;

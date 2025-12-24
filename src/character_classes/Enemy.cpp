@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const string& n,int level)
+Enemy::Enemy(const std::string& n,int level)
     : Character(n, level) {
         stats.hp = enemyHp(level);
         stats.maxHp = enemyHp(level);

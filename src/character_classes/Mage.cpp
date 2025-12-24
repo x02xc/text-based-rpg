@@ -1,6 +1,6 @@
 #include "Mage.h"
 
-Mage::Mage(const string& n,int level)
+Mage::Mage(const std::string& n,int level)
     : Character(n, level) {
         stats.hp = mageHp(level);
         stats.maxHp = mageHp(level);

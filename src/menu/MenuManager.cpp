@@ -12,11 +12,11 @@ void MenuManager::createMainMenu() {
 
             gameData->currentBattle.battleStart();
             
-            clearConsole();
+            terminal::clearConsole();
             gameData->currentBattle.printTurn();
             createFightMenu();
         }},
-        {"Print Party Stats",[this]() { clearConsole(); gameData->playerParty.printPartyInfo(); }},
+        {"Print Party Stats",[this]() { terminal::clearConsole(); gameData->playerParty.printPartyInfo(); }},
         {"Quit",[this]() { exit(0); }}
     });
 }
@@ -26,14 +26,14 @@ void MenuManager::createFightMenu() {
         "Choose an Option:",
         std::vector<Command>{
         {"Fight",[this]() { 
-            clearConsole();
+            terminal::clearConsole();
             createSelectSkillMenu();
         }},
         {"Print Battle Info",[this]() { 
-            clearConsole();
-            cout << "===== Player Party =====";
+            terminal::clearConsole();
+            std::cout << "===== Player Party =====\n";
             gameData->playerParty.printPartyInfo();
-            cout << endl << "===== Enemy Party =====";
+            std::cout << std::endl << "===== Enemy Party =====\n";
             gameData->arena[gameData->arenaIndex].printPartyInfo();
         }}
     });
@@ -47,12 +47,12 @@ void MenuManager::createSelectSkillMenu() {
     for(size_t i = 0; i < gameData->playerParty[gameData->partyIndex]->getSkillListSize(); i++) {
 
         skillMenuOptions.emplace_back(Command{
-            gameData->playerParty[gameData->partyIndex]->getSkills()[i]->getName(),
+            terminal::foreground(gameData->playerParty[gameData->partyIndex]->getSkills()[i]->getSkillColor()) + gameData->playerParty[gameData->partyIndex]->getSkills()[i]->getName() + terminal::foreground(terminal::white),
             [this,i]() { 
                 auto pickedSkill = gameData->playerParty[gameData->partyIndex]->getSkills()[i];
                 if(pickedSkill != nullptr) { gameData->currentBattle.skill = pickedSkill; }
                 gameData->currentBattle.source = gameData->playerParty[gameData->partyIndex];
-                clearConsole();
+                terminal::clearConsole();
                 createSelectTargetMenu();
             }
         });
@@ -61,10 +61,10 @@ void MenuManager::createSelectSkillMenu() {
     // back command - only added if not the first party member
     if(gameData->partyIndex != getFirstPartyIndex()) {
         skillMenuOptions.emplace_back(Command{
-            "[BACK]",
+            terminal::foreground(terminal::yellow) + "[BACK]" + terminal::foreground(terminal::white),
             [this]() {
                 prevPartyMember();
-                clearConsole();
+                terminal::clearConsole();
                 createSelectSkillMenu();
                 gameData->currentBattle.actionDeque.pop_back();
             }
@@ -72,12 +72,12 @@ void MenuManager::createSelectSkillMenu() {
     }
 
     skillMenuOptions.emplace_back(Command{
-        "[CANCEL]",
+        terminal::foreground(terminal::red) + "[CANCEL]" + terminal::foreground(terminal::white),
         [this]() {
                 gameData->partyIndex = getFirstPartyIndex();
                 menuStack.pop();
                 menuStack.pop();
-                clearConsole();
+                terminal::clearConsole();
                 gameData->currentBattle.printTurn();
                 createFightMenu();
         }
@@ -105,7 +105,7 @@ void MenuManager::createSelectTargetMenu() {
     // loop over valid targets and add them to targetMenuOptions
     for(size_t i = 0; i < gameData->currentBattle.validTargets.size(); i++) {
         targetMenuOptions.emplace_back(Command{
-            gameData->currentBattle.validTargets[i]->getName(),
+        terminal::foreground(gameData->currentBattle.validTargets[i]->getHealthColor()) + gameData->currentBattle.validTargets[i]->getName() + terminal::foreground(terminal::white),
             [this,i]() {
                 gameData->currentBattle.target = gameData->currentBattle.validTargets[i];
 
@@ -117,7 +117,7 @@ void MenuManager::createSelectTargetMenu() {
 
                 // if false, there's no more party members, so invoke processTurn()
                 if(!nextPartyMember()) {
-                    clearConsole();
+                    terminal::clearConsole();
                     gameData->currentBattle.processTurn();
                     // if battle is over then end battle
                     if(!(gameData->currentBattle.playerParty.getIsAlive()) || !(gameData->currentBattle.enemyParty.getIsAlive())) {
@@ -127,7 +127,7 @@ void MenuManager::createSelectTargetMenu() {
                         menuStack.pop();
                         menuStack.pop();
                         menuStack.pop();
-                        clearConsole();
+                        // terminal::clearConsole();
                         return;
                     }
                     
@@ -141,26 +141,27 @@ void MenuManager::createSelectTargetMenu() {
                 else {
                     menuStack.pop();
                     menuStack.pop();
-                    clearConsole();
+                    terminal::clearConsole();
                     createSelectSkillMenu();
                 }
             }
         });
+
     }
 
     // back command
     targetMenuOptions.emplace_back(Command{
-        "[BACK]",
-        [this]() { clearConsole(); menuStack.pop(); }
+        terminal::foreground(terminal::yellow) + "[BACK]" + terminal::foreground(terminal::white),
+        [this]() { terminal::clearConsole(); menuStack.pop(); }
     });
 
     targetMenuOptions.emplace_back(Command{
-        "[CANCEL]",
+        terminal::foreground(terminal::red) + "[CANCEL]" + terminal::foreground(terminal::white),
         [this]() {
                 gameData->partyIndex = getFirstPartyIndex();
                 menuStack.pop();
                 menuStack.pop();
-                clearConsole();
+                terminal::clearConsole();
                 gameData->currentBattle.printTurn();
                 createFightMenu();
         }
@@ -227,9 +228,5 @@ void MenuManager::run() {
 // -----------------  DEBUG FUNCS  -------------------->
 
 void MenuManager::printTopStack() const {
-    std::cout << menuStack.top().menuMessage << endl;
-}
-
-void MenuManager::clearConsole() const {
-    cout << "\033[2J";
+    std::cout << menuStack.top().menuMessage << std::endl;
 }

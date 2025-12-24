@@ -6,7 +6,7 @@
 int main() {
     srand(time(0));
 
-    cout << "===== WELCOME =====\n\n";
+    terminal::setup();
 
     Game game;
     

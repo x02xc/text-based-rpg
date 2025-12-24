@@ -10,9 +10,9 @@
 struct Combat {
     Party playerParty;
     Party enemyParty;
-    vector<Character*> validTargets;
+    std::vector<Character*> validTargets;
     int turnCount{1};
-    deque<Action> actionDeque;
+    std::deque<Action> actionDeque;
     Character* source{};
     Character* target{};
     Skill* skill{};

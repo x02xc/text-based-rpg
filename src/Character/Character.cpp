@@ -4,7 +4,7 @@
 #include "../skills/DamageHp.h"
 
 // constructor
-Character::Character(string n, int l) 
+Character::Character(std::string n, int l) 
     : name(n), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isAlive(true), isDefending(false) { 
     stats.level = l;
     skills.emplace_back(&BasicAttack);
@@ -32,8 +32,33 @@ float Character::getMaxResistance() const { return stats.maxResistance; }
 bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
 bool Character::getIsMagic() const { return isMagic; }
-const vector<Skill*>& Character::getSkills() { return skills; }
+const std::vector<Skill*>& Character::getSkills() { return skills; }
 size_t Character::getSkillListSize() const { return skills.size(); }
+terminal::Color Character::getClassColor() const {
+    switch(this->characterClass) {
+        case ClassType::Warrior:
+            return terminal::brightRed;
+            break;
+        case ClassType::Mage:
+            return terminal::brightBlue;
+            break;
+        case ClassType::Archer:
+            return terminal::brightGreen;
+            break;
+        case ClassType::Healer:
+            return terminal::brightMagenta;
+            break;
+        case ClassType::Enemy:
+        case ClassType::Boss:
+            return terminal::white;
+            break;
+    }
+}
+terminal::Color Character::getHealthColor() const {
+    if(stats.hp >= (0.7*stats.maxHp)) { return terminal::brightGreen; }
+    else if(stats.hp >= (0.3*stats.maxHp)) { return terminal::brightYellow; }
+    else { return terminal::brightRed; }
+}
 
 // setters
 void Character::setHp(float h) { stats.hp = h; }
@@ -84,9 +109,10 @@ void Character::canLevel(float xp) {
 
 // print info
 void Character::printInfo() const {
-    std::cout << "===== " << name << " ( ";
+
+    std::cout << terminal::foreground(getClassColor()) << "===== " << name << " ( ";
     printClass();
-    std::cout << " ) =====\n";
+    std::cout << " ) =====\n" << terminal::reset;
     std::cout << "LEVEL: " << stats.level << " (" << exp << "exp / " << nextLevel << "exp)" << " | ";
     std::cout << "HP: " << stats.hp << " / " << stats.maxHp << " | ";
     std::cout << "ATK: " << stats.attack << " | ";
@@ -94,11 +120,11 @@ void Character::printInfo() const {
     std::cout << "MAG: " << stats.magic << " | ";
     std::cout << "RES: " << stats.resistance << " | ";
     std::cout << "STATUS: " << (isAlive ? "Alive" : "Dead");
-    std::cout << endl;
+    std::cout << std::endl << std::endl;
 }
 
 void Character::printSkills() const {
     for (size_t i = 0; i < skills.size(); i++) {
-        std::cout << i + 1 << ") " << skills[i]->getName() << endl;
+        std::cout << i + 1 << ") " << skills[i]->getName() << std::endl;
     }
 }
