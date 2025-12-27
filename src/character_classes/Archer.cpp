@@ -1,6 +1,4 @@
 #include "Archer.h"
-#include "../skills/SkillList.h"
-#include "../skills/DamageHp.h"
 
 Archer::Archer(const std::string& n,int level)
     : Character(n, level) {

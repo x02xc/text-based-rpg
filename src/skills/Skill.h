@@ -43,4 +43,32 @@ public:
     void cantUse(Character* source) const;
 };
 
+class BuffAtk : public Skill {
+public:
+    BuffAtk(std::string n, bool magic, bool dmg, float p, float c, TargetType tt);
+
+    void useSkill(Character* source, Character* target) override;
+};
+
+class BuffDef : public Skill {
+public:
+    BuffDef(std::string n, bool magic, bool dmg, float p, float c, TargetType tt);
+
+    void useSkill(Character* source, Character* target) override;
+};
+
+class DebuffRes : public Skill {
+public:
+    DebuffRes(std::string n, bool magic, bool dmg, float p, float c, TargetType tt);
+
+    void useSkill(Character* source, Character* target) override;
+};
+
+class DamageHp : public Skill {
+public:
+    DamageHp(std::string n, bool magic, bool dmg, float p, float c, TargetType tt);
+
+    void useSkill(Character* source, Character* target) override;
+};
+
 #endif

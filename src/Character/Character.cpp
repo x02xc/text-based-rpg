@@ -1,7 +1,5 @@
 #include "Character.h"
 #include "../skills/SkillList.h"
-#include "../skills/BuffDef.h"
-#include "../skills/DamageHp.h"
 
 // constructor
 Character::Character(std::string n, int l) 

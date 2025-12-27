@@ -1,8 +1,5 @@
 #include "SkillList.h"
-
-#include "DamageHp.h"
-#include "BuffDef.h"
-#include "BuffAtk.h"
+#include "Skill.h"
 
 // (name,isMagic,isDmg,points,cost,TargetType)
 DamageHp BasicAttack("Attack", false, true, 10, 0, TargetType::ONE_ENEMY);
