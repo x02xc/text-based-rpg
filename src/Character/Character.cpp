@@ -5,6 +5,7 @@
 Character::Character(std::string n, int l) 
     : name(n), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isAlive(true), isDefending(false) { 
     stats.level = l;
+    stats.resourceRegen = 1.f;
     skills.emplace_back(&BasicAttack);
     skills.emplace_back(&BasicDefend);
 }
@@ -27,6 +28,7 @@ float Character::getMagic() const { return stats.magic; }
 float Character::getMaxMagic() const { return stats.maxMagic; }
 float Character::getResistance() const { return stats.resistance; }
 float Character::getMaxResistance() const { return stats.maxResistance; }
+float Character::getResourceRegen() const { return stats.resourceRegen; }
 bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
 bool Character::getIsMagic() const { return isMagic; }
@@ -126,4 +128,9 @@ void Character::checkNewSkill() {
     if(unlockableSkills[stats.level]) {
         skills.emplace_back(unlockableSkills[stats.level]);
     }
+}
+
+void Character::resourceRegen() {
+    setResource(getResource() - (3.f*getResourceRegen()));
+    if(getResource() > getMaxResource()) { setResource(getMaxResource()); }
 }

@@ -10,6 +10,8 @@ struct Stats {
     float defense; float maxDefense;
     float magic;  float maxMagic;
     float resistance; float maxResistance;
+
+    float resourceRegen;
 };
 
 enum class ResourceType { Mana, Stamina};

@@ -95,14 +95,8 @@ Skill* Combat::getEnemySkill(Character* source) {
 
 void Combat::performAction(Character* source, Character* target, Skill* skill) {
 
-
     // decrease resource only if it's not ALL_ALLIES or ALL_ENEMIES target type
-    if(!(skill->getTargetType() == TargetType::ALL_ALLIES) && !(skill->getTargetType() == TargetType::ALL_ENEMIES)) {
-        source->setResource(source->getResource() - skill->getCost());
-    }
-    else {
-        
-    }
+    source->setResource(source->getResource() - skill->getCost());
     
     // use skill on target
     skill->useSkill(source,target);
