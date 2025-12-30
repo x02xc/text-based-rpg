@@ -16,8 +16,6 @@ SRCS := \
     src/menu/MenuManager.cpp \
     src/party/Party.cpp \
     src/skills/Skill.cpp \
-    src/skills/DamageHp.cpp \
-    src/skills/BuffDef.cpp \
     src/skills/SkillList.cpp \
     src/character_classes/Warrior.cpp \
     src/character_classes/Mage.cpp \

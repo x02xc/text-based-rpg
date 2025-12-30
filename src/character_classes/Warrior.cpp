@@ -1,8 +1,5 @@
 #include "Warrior.h"
 #include "../skills/SkillList.h"
-#include "../skills/DamageHp.h"
-#include "../skills/BuffAtk.h"
-#include "../skills/BuffDef.h"
 
 Warrior::Warrior(const std::string& n,int level)
     : Character(n, level) {

@@ -142,9 +142,12 @@ void MenuManager::createSelectTargetMenu() {
                     gameData->partyIndex = getFirstPartyIndex();
                     menuStack.pop();
                     menuStack.pop();
-                    gameData->currentBattle.turnCount++;
+                    // gameData->currentBattle.turnCount++;
+                    // std::cout << "===== Player Party =====\n";
+                    // gameData->playerParty.printPartyInfo();
+                    // std::cout << std::endl << "===== Enemy Party =====\n";
+                    // gameData->arena[gameData->arenaIndex].printPartyInfo();
                     gameData->currentBattle.printTurn();
-
                 }
                 else {
                     menuStack.pop();

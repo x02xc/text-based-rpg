@@ -21,7 +21,7 @@ Game::~Game() {
 
     // delete arena
     for (size_t i = 0; i < gameData.arena.size(); i++) {
-        for (size_t j = 0; i < gameData.arena[i].getPartySize(); j++) {
+        for (size_t j = 0; j < gameData.arena[i].getPartySize(); j++) {
             delete gameData.arena[i].getParty()[j];
         }
     }
@@ -114,5 +114,5 @@ bool Game::combatLoop() {
 }
 
 void Game::clearConsole() const {
-    std::cout << "\033[2J";
+    std::cout << "\x1B[2J\x1B[H";
 }

@@ -30,5 +30,4 @@ public:
 
     void printTopStack() const;
 
-    void clearConsole() const;
 };

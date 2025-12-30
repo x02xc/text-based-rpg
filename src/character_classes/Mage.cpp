@@ -15,6 +15,12 @@ Mage::Mage(const std::string& n,int level)
         stats.resistance = mageResistance(level);
         stats.maxResistance = mageResistance(level);
 
+        skills.emplace_back(&Fireball);
+
+        unlockableSkills = {
+            {2,&WeakenResistance}
+        };
+
         isMagic = true;
 
         characterClass = ClassType::Mage;

@@ -56,5 +56,5 @@ std::string terminal::both(Color foreground, Color background) {
 }
 
 void terminal::clearConsole() {
-    std::cout << "\033[2J";
+    std::cout << "\x1B[2J\x1B[H";
 }
