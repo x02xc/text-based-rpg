@@ -42,7 +42,7 @@ void BuffAtk::useSkill(Character* source, Character* target) {
 
     statPoints = target->getAtk() + points * (source->getLevel() * 0.5);
 
-    target->setDefense(statPoints);
+    target->setAttack(statPoints);
     std::cout << terminal::foreground(target->getHealthColor()) << target->getName() << terminal::reset << "'s attack was raised by " << ((isMagic) ? terminal::foreground(terminal::brightMagenta) : terminal::foreground(terminal::brightGreen)) << statPoints << terminal::reset << "!\n";
 }
 
@@ -68,8 +68,8 @@ void DebuffRes::useSkill(Character* source, Character* target) {
 
     statPoints = target->getResistance() + points * (source->getLevel() * 0.5);
 
-    target->setDefense(statPoints);
-    std::cout << terminal::foreground(target->getHealthColor()) << target->getName() << terminal::reset << "'s defense was raised by " << ((isMagic) ? terminal::foreground(terminal::brightMagenta) : terminal::foreground(terminal::brightGreen)) << statPoints << terminal::reset << "!\n";
+    target->setResistance(statPoints);
+    std::cout << terminal::foreground(target->getHealthColor()) << target->getName() << terminal::reset << "'s defense was raised by " << ((isMagic) ? terminal::foreground(terminal::brightBlue) : terminal::foreground(terminal::brightRed)) << statPoints << terminal::reset << "!\n";
 }
 
 // damagehp
@@ -85,4 +85,17 @@ void DamageHp::useSkill(Character* source, Character* target) {
     target->setHp(target->getHp() - dmgPoints);
     if (target->getHp() < 0) { target->setHp(0); }
     std::cout << terminal::foreground(target->getHealthColor()) << target->getName() << terminal::reset << " lost " << ((isMagic) ? terminal::foreground(terminal::brightBlue) : terminal::foreground(terminal::brightRed)) << dmgPoints << terminal::reset << " HP!\n";
+}
+
+HealHp::HealHp(std::string n, bool magic, bool dmg, float p, float c, TargetType tt)
+    : Skill(n,magic,dmg,p,c,tt) {}
+
+void HealHp::useSkill(Character* source, Character* target) {
+    float healPoints;
+
+    healPoints = (source->getMagic()*0.2) * points;
+
+    target->setHp(target->getHp() + healPoints);
+    if (target->getHp() > target->getMaxHp()) { target->setHp(target->getMaxHp()); }
+    std::cout << terminal::foreground(target->getHealthColor()) << target->getName() << terminal::reset << " gained " << terminal::foreground(terminal::brightMagenta) << healPoints << terminal::reset << " HP!\n";
 }

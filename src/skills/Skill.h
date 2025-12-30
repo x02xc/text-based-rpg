@@ -71,4 +71,11 @@ public:
     void useSkill(Character* source, Character* target) override;
 };
 
+class HealHp : public Skill {
+public:
+    HealHp(std::string n, bool magic, bool dmg, float p, float c, TargetType tt);
+
+    void useSkill(Character* source, Character* target) override;
+};
+
 #endif

@@ -14,4 +14,9 @@ DamageHp ArrowShot("Arrow Shot", false, true, 25, 15, TargetType::ONE_ENEMY);
 DamageHp Volley("Volley", false, true, 10, 35, TargetType::ALL_ENEMIES);
 
 // Mage Skills
-DamageHp Fireball("Fireball", true, false, 25, 15, TargetType::ONE_ENEMY);
+DamageHp Fireball("Fireball", true, true, 13, 10, TargetType::ONE_ENEMY);
+DebuffRes WeakenResistance("Weaken Resistance", true, true, 15, 20, TargetType::ONE_ENEMY);
+
+// Healer Skills
+HealHp BasicHeal("Heal", true, false, 10, 5, TargetType::ONE_ALLY);
+BuffDef StrengthenDefense("Strengthen Defense", true, false, 20, 15, TargetType::ONE_ALLY);
