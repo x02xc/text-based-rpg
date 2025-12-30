@@ -125,7 +125,7 @@ void Combat::processTurn() {
         }
 
         // resource regen
-        // playerParty[i]->setResource(playerParty[i]->getResource() + (0.5 * playerParty[i]->getMaxResource()));
+        playerParty[i]->resourceRegen();
     }
     
     // perform actions

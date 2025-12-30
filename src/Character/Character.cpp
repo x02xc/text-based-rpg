@@ -5,7 +5,6 @@
 Character::Character(std::string n, int l) 
     : name(n), exp(0), nextLevel(nextLevelFormula(l)), expDrop(expDropFormula(l)), isAlive(true), isDefending(false) { 
     stats.level = l;
-    stats.resourceRegen = 1.f;
     skills.emplace_back(&BasicAttack);
     skills.emplace_back(&BasicDefend);
 }
@@ -28,14 +27,13 @@ float Character::getMagic() const { return stats.magic; }
 float Character::getMaxMagic() const { return stats.maxMagic; }
 float Character::getResistance() const { return stats.resistance; }
 float Character::getMaxResistance() const { return stats.maxResistance; }
-float Character::getResourceRegen() const { return stats.resourceRegen; }
 bool Character::getIsAlive() const { return isAlive; }
 bool Character::getIsDefending() const { return isDefending; }
 bool Character::getIsMagic() const { return isMagic; }
 const std::vector<Skill*>& Character::getSkills() { return skills; }
 size_t Character::getSkillListSize() const { return skills.size(); }
 terminal::Color Character::getClassColor() const {
-    switch(this->characterClass) {
+    switch(characterClass) {
         case ClassType::Warrior:
             return terminal::brightRed;
             break;
@@ -48,8 +46,7 @@ terminal::Color Character::getClassColor() const {
         case ClassType::Healer:
             return terminal::brightMagenta;
             break;
-        case ClassType::Enemy:
-        case ClassType::Boss:
+        default:
             return terminal::white;
             break;
     }
@@ -131,6 +128,6 @@ void Character::checkNewSkill() {
 }
 
 void Character::resourceRegen() {
-    setResource(getResource() - (3.f*getResourceRegen()));
+    setResource(getResource() - (3.f*((stats.level*0.2f) + stats.level)));
     if(getResource() > getMaxResource()) { setResource(getMaxResource()); }
 }
