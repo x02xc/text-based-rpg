@@ -57,7 +57,6 @@ public:
     float getMaxMagic() const;
     float getResistance() const;
     float getMaxResistance() const;
-    float getResourceRegen() const;
     bool getIsAlive() const;
     bool getIsDefending() const;
     bool getIsMagic() const;
@@ -76,7 +75,6 @@ public:
     void setIsAlive(bool b);
     void setIsDefending(bool b);
     void setIsMagic(bool b);
-    void setResourceRegen(float r);
 
     typedef float(*construct_attack)(int level);
 
@@ -87,7 +85,6 @@ public:
     virtual void setDefStat() = 0;
     virtual void setMagicStat() = 0;
     virtual void setResistanceStat() = 0;
-    virtual void setResourceRegen() = 0;
 
     // full heal
     void fullHeal();

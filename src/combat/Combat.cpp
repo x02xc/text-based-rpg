@@ -21,27 +21,27 @@ void Combat::printTurn() const {
 }
 
 void Combat::endInfo(Party *winners) const {
-    std::cout << ((playerParty.getIsAlive()) ? terminal::foreground(terminal::brightGreen) : terminal::foreground(terminal::brightRed)) << "====================================" << std::endl;
-    std::cout << "BATTLE HAS ENDED!" << std::endl;
+    std::cout << ((playerParty.getIsAlive()) ? terminal::foreground(terminal::brightGreen) : terminal::foreground(terminal::brightRed)) << "====================================" << "\n";
+    std::cout << "BATTLE HAS ENDED!" << "\n";
     std::cout << "WINNERS: ";
     for (size_t i = 0; i < winners->getPartySize(); i++) { std::cout << (*winners)[i]->getName() << " | "; } 
-    std::cout << std::endl;
-    std::cout << "====================================" << std::endl << std::endl << terminal::reset;
+    std::cout << "\n";
+    std::cout << "====================================" << "\n\n" << terminal::reset;
 
     // TODO - Print XP, LVL, etc. 
 
 }
 
 void Combat::battleStart() const {
-    std::cout << "====================================" << std::endl;
-    std::cout << "BATTLE HAS BEGUN!" << std::endl;
+    std::cout << "====================================" << "\n";
+    std::cout << "BATTLE HAS BEGUN!" << "\n";
     // Print Player Party
     for (size_t i = 0; i < playerParty.getPartySize(); i++) { std::cout << playerParty[i]->getName() << " "; } 
-    std::cout << std::endl;
+    std::cout << "\n";
     std::cout << "VS\n";
     // Print Enemy Party
     for (size_t i = 0; i < enemyParty.getPartySize(); i++) { std::cout << enemyParty[i]->getName() << " "; } 
-    std::cout << std::endl << "====================================" << std::endl << std::endl;
+    std::cout << "\n" << "====================================" << "\n" << "\n";
 }
 
 void Combat::getValidTargets(const Party& sourceParty, const Party& opposingParty, Character* actingCharacter, Skill* actingSkill) {
@@ -125,7 +125,7 @@ void Combat::processTurn() {
         }
 
         // resource regen
-        playerParty[i]->resourceRegen();
+        // playerParty[i]->resourceRegen();
     }
     
     // perform actions

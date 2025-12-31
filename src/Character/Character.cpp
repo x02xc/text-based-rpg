@@ -112,12 +112,12 @@ void Character::printInfo() const {
     std::cout << "MAG: " << stats.magic << " | ";
     std::cout << "RES: " << stats.resistance << " | ";
     std::cout << "STATUS: " << (isAlive ? "Alive" : "Dead");
-    std::cout << std::endl << std::endl;
+    std::cout << "\n\n";
 }
 
 void Character::printSkills() const {
     for (size_t i = 0; i < skills.size(); i++) {
-        std::cout << i + 1 << ") " << skills[i]->getName() << std::endl;
+        std::cout << i + 1 << ") " << skills[i]->getName() << "\n";
     }
 }
 
