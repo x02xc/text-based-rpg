@@ -38,9 +38,6 @@ public:
     bool canUse(Character* source);
 
     virtual void useSkill(Character* source, Character* target) = 0;
-
-    // print
-    void cantUse(Character* source) const;
 };
 
 class BuffAtk : public Skill {

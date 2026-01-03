@@ -10,7 +10,6 @@
 #include "../character_classes/Mage.h"
 #include "../character_classes/Archer.h"
 #include "../character_classes/Healer.h"
-#include "../character_classes/Enemy.h"
 #include "../character_classes/Boss.h"
 #include "../combat/Combat.h"
 #include "../party/Party.h"

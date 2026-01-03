@@ -29,10 +29,6 @@ terminal::Color Skill::getSkillColor() const {
     }
 }
 
-void Skill::cantUse(Character* source) const {
-    std::cout << (source->getIsMagic()) ? "Not Enough Mana!\n" : "Not Enough Stamina!\n";
-}
-
 // buffatk
 BuffAtk::BuffAtk(std::string n, bool magic, bool dmg, float p, float c, TargetType tt)
     : Skill(n,magic,dmg,p,c,tt) {}
