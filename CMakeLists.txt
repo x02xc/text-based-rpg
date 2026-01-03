@@ -23,7 +23,7 @@ target_include_directories(text_rpg PRIVATE src)
 
 GroupSourcesByFolder(text_rpg)
 
-target_compile_options(text_rpg PRIVATE -Wall -Wextra)
+target_compile_options(text_rpg PRIVATE -DNOMINMAX)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 	target_compile_options(text_rpg PRIVATE $<$<CONFIG:Debug>:-g -O0>)
