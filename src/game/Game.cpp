@@ -83,6 +83,14 @@ void Game::createPlayerParty() {
 
             clearConsole();
 
+            if (std::cin.fail())
+            {
+                std::cout << terminal::foreground(terminal::red) << "Invalid Input.\n" << terminal::reset;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
+            }
+
             if (choice < 1 || choice > 4) { std::cout << terminal::foreground(terminal::red) << "Invalid Option.\n" << terminal::reset; }
             else { endLoop = true; }
         }

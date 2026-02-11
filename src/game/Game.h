@@ -17,7 +17,7 @@
 #include "../menu/MenuManager.h"
 #include "GameData.h"
 #include "../Terminal.h"
-#include "../Random.cpp"
+#include "../Random.h"
 
 class Game {
 private:
