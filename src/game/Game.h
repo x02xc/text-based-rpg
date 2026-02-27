@@ -14,10 +14,8 @@
 #include "../menu/MenuManager.h"
 #include "../party/Party.h"
 #include "GameData.h"
-#include <array>
-#include <random>
-#include <stack>
-#include <vector>
+#include "../Terminal.h"
+#include "../Random.h"
 
 class Game {
   private:

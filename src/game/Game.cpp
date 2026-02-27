@@ -56,71 +56,50 @@ std::vector<Character*> Game::createEnemyParty(int level) {
 }
 
 void Game::createPlayerParty() {
-	int choice;
+    int choice;
 
-	// create player party
-	for (int i = 0; i < 4; i++) {
+    // create player party
+    for (int i = 0; i < 4; i++) {
 
-		// prompt for member name
-		std::string name;
-		std::cout << "Party Member " << i + 1 << ": " << "\n";
-		std::cout << "Name: ";
-		std::cin >> name;
-		clearConsole();
+        // prompt for member name
+        std::string name;
+        std::cout << "Party Member " << i + 1 << ": " << "\n";
+        std::cout << "Name: ";
+        std::cin >> name;
+        clearConsole();
 
-		// prompt for member class
-		bool endLoop{};
-		while (!endLoop) {
-			std::cout << "Choose Class for " << name << ": " << "\n";
-			std::cout << "1) " << terminal::foreground(terminal::brightRed)
-					  << "Warrior\n"
-					  << terminal::reset;
-			std::cout << "2) " << terminal::foreground(terminal::brightBlue)
-					  << "Mage\n"
-					  << terminal::reset;
-			std::cout << "3) " << terminal::foreground(terminal::brightGreen)
-					  << "Archer\n"
-					  << terminal::reset;
-			std::cout << "4) " << terminal::foreground(terminal::brightMagenta)
-					  << "Healer\n"
-					  << terminal::reset;
-			std::cout << terminal::reset << ">";
-			std::cin >> choice;
+        // prompt for member class
+        bool endLoop{};
+        while(!endLoop) {
+            std::cout << "Choose Class for " << name << ": " << "\n";
+            std::cout << "1) " << terminal::foreground(terminal::brightRed) << "Warrior\n" << terminal::reset;
+            std::cout << "2) " << terminal::foreground(terminal::brightBlue) << "Mage\n" << terminal::reset;
+            std::cout << "3) " << terminal::foreground(terminal::brightGreen) << "Archer\n" << terminal::reset;
+            std::cout << "4) " << terminal::foreground(terminal::brightMagenta) << "Healer\n" << terminal::reset;
+            std::cout << terminal::reset << ">";
+            std::cin >> choice;
 
-			clearConsole();
+            clearConsole();
 
-			if (std::cin.fail()) {
-				std::cout << terminal::foreground(terminal::red)
-						  << "Invalid Input.\n"
-						  << terminal::reset;
-				std::cin.clear();
+            if (std::cin.fail())
+            {
+                std::cout << terminal::foreground(terminal::red) << "Invalid Input.\n" << terminal::reset;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
+            }
 
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(),
-								'\n');
-				continue;
-			}
-			if (choice < 1 || choice > 4) {
-				std::cout << terminal::foreground(terminal::red)
-						  << "Invalid Option.\n"
-						  << terminal::reset;
-			} else {
-				endLoop = true;
-			}
-		}
+            if (choice < 1 || choice > 4) { std::cout << terminal::foreground(terminal::red) << "Invalid Option.\n" << terminal::reset; }
+            else { endLoop = true; }
+        }
 
-		if (choice == 1) {
-			gameData.playerParty.insertMember(new Warrior(name, 1));
-		}
-		if (choice == 2) {
-			gameData.playerParty.insertMember(new Mage(name, 1));
-		}
-		if (choice == 3) {
-			gameData.playerParty.insertMember(new Archer(name, 1));
-		}
-		if (choice == 4) {
-			gameData.playerParty.insertMember(new Healer(name, 1));
-		}
-	}
+        if (choice == 1) { gameData.playerParty.insertMember(new Warrior(name,1)); }
+        if (choice == 2) { gameData.playerParty.insertMember(new Mage(name,1)); }
+        if (choice == 3) { gameData.playerParty.insertMember(new Archer(name,1)); }
+        if (choice == 4) { gameData.playerParty.insertMember(new Healer(name,1)); }
+
+    }
+
 }
 
 void Game::gameLoop() {
